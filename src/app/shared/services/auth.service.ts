@@ -5,8 +5,6 @@ import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firest
 import {Router} from '@angular/router';
 import {User} from './user';
 
-
-
 @Injectable({
   providedIn: 'root'
 })
@@ -34,6 +32,7 @@ export class AuthService {
   }
   static get isLoggedIn(): boolean {
     const user = JSON.parse(localStorage.getItem('user'));
+    console.log(user);
     return (user !== null && user.emailVerified !== false);
   }
 // Sign in with email/password
