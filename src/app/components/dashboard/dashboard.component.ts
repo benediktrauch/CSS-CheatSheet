@@ -24,9 +24,9 @@ export class DashboardComponent implements OnInit {
         title: 'Cover',
         code: {
           html: `<div class="box"></div>`,
-          css: '.box{' +
-            'box-shadow: 0px 2px 2px 1px rgba(0, 0, 0, 0.2);' +
-            '}',
+          css: `.box{
+box-shadow: 0px 2px 2px 1px rgba(0, 0, 0, 0.2);
+}`,
           htmlSource: `<div class="box">Box</div>`,
           cssSource: `{"box-shadow": "0px 2px 2px 1px rgba(0, 0, 0, 0.2)"}`,
           lang: 'web'
