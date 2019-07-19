@@ -13,11 +13,11 @@ import {ProfileComponent} from './components/profile/profile.component';
 const routes: Routes = [
   { path: '', redirectTo: '/dashboard', pathMatch: 'full'},
   { path: 'dashboard', component: DashboardComponent},
-  { path: 'sign-in', component: SignInComponent, canActivate: [SecureInnerPagesGuard]},
-  { path: 'register-user', component: SignUpComponent, canActivate: [SecureInnerPagesGuard]},
-  { path: 'forgot-password', component: ForgotPasswordComponent, canActivate: [SecureInnerPagesGuard] },
+  { path: 'sign-in', component: SignInComponent},
+  { path: 'register-user', component: SignUpComponent},
+  { path: 'forgot-password', component: ForgotPasswordComponent},
   { path: 'profile', component: ProfileComponent, canActivate: [SecureInnerPagesGuard] },
-  { path: 'verify-email-address', component: VerifyEmailComponent, canActivate: [SecureInnerPagesGuard] }
+  { path: 'verify-email-address', component: VerifyEmailComponent}
 ];
 
 @NgModule({

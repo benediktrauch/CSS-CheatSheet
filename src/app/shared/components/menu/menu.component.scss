@@ -1,0 +1,8 @@
+@import "~src/styles";
+
+nav {
+  height: 3em;
+  background-color: calculateElevation(10);
+  box-shadow: $boxShadow;
+
+}

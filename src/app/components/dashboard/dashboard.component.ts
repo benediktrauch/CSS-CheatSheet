@@ -21,12 +21,14 @@ export class DashboardComponent implements OnInit {
     this.codeSnippets = [
       {
         id: '2sfuwh7rzhsif',
-        title: 'Cover',
+        title: 'Box Shadow',
         code: {
-          html: `<div class="box"></div>`,
-          css: `.box{
-box-shadow: 0px 2px 2px 1px rgba(0, 0, 0, 0.2);
-}`,
+          html: `<div class="box">Box</div>`,
+          css: `
+.box {
+  box-shadow: 0px 2px 2px 1px rgba(0, 0, 0, 0.2);
+}
+`,
           htmlSource: `<div class="box">Box</div>`,
           cssSource: `{"box-shadow": "0px 2px 2px 1px rgba(0, 0, 0, 0.2)"}`,
           lang: 'web'
@@ -38,9 +40,7 @@ box-shadow: 0px 2px 2px 1px rgba(0, 0, 0, 0.2);
         title: 'Cover',
         code: {
           html: `<div class="color"></div>`,
-          css: `.color{
-          background: blue;
-          }`,
+          css: `.color{ color: red;}`,
           htmlSource: `<div>Color</div>`, // style="background: blue"
           cssSource: `{"color": "red"}`,
           lang: 'web'
@@ -56,5 +56,9 @@ box-shadow: 0px 2px 2px 1px rgba(0, 0, 0, 0.2);
   // makeHtmlTrusted(html) {
   //   return this.sanitizer.bypassSecurityTrustHtml(html);
   // }
+
+  isLoggedIn() {
+    return AuthService.isLoggedIn;
+  }
 
 }

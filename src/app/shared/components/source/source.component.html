@@ -1,0 +1,33 @@
+<mat-tab-group>
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <img src="../../../../assets/img/HTML5_Logo.svg" alt="HTML5 Logo">
+      HTML
+    </ng-template>
+    <ngx-prism
+      [language]="'html'"
+      [code]="snippet.code.html"
+    ></ngx-prism>
+  </mat-tab>
+
+  <mat-tab label="CSS">
+    <ng-template mat-tab-label>
+      <img src="../../../../assets/img/CSS3_Logo.svg" alt="CSS3 Logo">
+      CSS
+    </ng-template>
+    <ngx-prism
+      [language]="'css'"
+      [code]="snippet.code.css"
+      [hooks] = "hooks"
+      [interpolation] = "interpolate"
+    ></ngx-prism>
+    <!--<pre>-->
+    <!--<code class="language-css">{{snippet.code.css}}</code>-->
+    <!--</pre>-->
+
+
+    <!--<pre>-->
+    <!--<code class="language-html">{{snippet.code.html}}</code>-->
+    <!--</pre>-->
+  </mat-tab>
+</mat-tab-group>

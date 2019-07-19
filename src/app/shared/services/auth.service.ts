@@ -66,7 +66,14 @@ export class AuthService {
         this.router.navigate(['verify-email-address']);
       });
   }
-
+  ForgotPassword(passwordResetEmail) {
+    return this.afAuth.auth.sendPasswordResetEmail(passwordResetEmail)
+      .then(() => {
+        window.alert('Password reset email sent, check your inbox.');
+      }).catch((error) => {
+        window.alert(error);
+      });
+  }
 // Sign in with Google
   GoogleAuth() {
     return this.AuthLogin(new auth.GoogleAuthProvider());

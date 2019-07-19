@@ -2,11 +2,17 @@
 
   <!--<button mat-raised-button color="primary">Click me!</button>-->
 
+  <div *ngIf="isLoggedIn()">
+    Add new
+  </div>
+
   <div *ngFor="let snippet of codeSnippets" class="snippet">
-    <div class="header">{{snippet.title}}</div>
-    <div class="main">{{snippet.desc}}</div>
+    <h1 class="header">{{snippet.title}}</h1>
+    <div class="main">
+      <p>{{snippet.desc}}</p>
+    </div>
     <div class="code">
-      <div class="result">
+      <div class="block result">
         <!--
           <div
           [innerHTML]="makeHtmlTrusted(snippet.code.htmlSource)"
@@ -16,9 +22,12 @@
         <csscs-snippet [snippet]="snippet"></csscs-snippet>
 
       </div>
-      <code class="source">{{snippet.code.html}}</code>
-      <pre><code class="language-css">{{snippet.code.css}}</code></pre>
-      <code class="source"></code>
+      <!--<code class="source">{{snippet.code.html}}</code>-->
+      <div class="block source">
+
+        <csscs-source [snippet]="snippet"></csscs-source>
+
+      </div>
     </div>
     <div class="footer">Bla bla</div>
   </div>

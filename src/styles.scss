@@ -1,6 +1,27 @@
 // Custom Theming for Angular Material
 // For more information: https://material.angular.io/guide/theming
 @import '~@angular/material/theming';
+
+@import '~prismjs/themes/prism-okaidia.css';
+
+@import "~@material/animation/functions";
+@import "~@material/animation/variables";
+@import "~@material/floating-label/dist/mdc.floating-label.css";
+//@import "~@material/floating-label/mdc-floating-label";
+@import "~@material/form-field/dist/mdc.form-field.css";
+@import "~@material/button/dist/mdc.button.css";
+@import "~@material/textfield/dist/mdc.textfield.css";
+
+//@import '~@material/textfield/mdc-text-field';
+
+//@import '~prismjs/themes/prism-coy.css';
+//@import '~prismjs/themes/prism-dark.css';
+//@import '~prismjs/themes/prism-funky.css';
+//@import '~prismjs/themes/prism-solarizedlight.css';
+//@import '~prismjs/themes/prism-tomorrow.css';
+//@import '~prismjs/themes/prism-twilight.css';
+//@import '~prismjs/themes/prism.css';
+
 // Plus imports for other components in your app.
 
 // Include the common styles for Angular Material. We include this here so that you only
@@ -13,12 +34,45 @@
 // hue. Available color palettes: https://material.io/design/color/
 $CSSCheatSheet-primary: mat-palette($mat-green, 500);
 $CSSCheatSheet-accent: mat-palette($mat-pink, A200, A100, A400);
+$CSSCheatSheet-dark-normal: mat-color($mat-blue-grey, 900);
+$CSSCheatSheet-dark-lighter: #4f5b62;
+$CSSCheatSheet-dark-darker: #000a12;
+
+$mdd-surface: #121212;
 
 // The warn palette is optional (defaults to red).
 $CSSCheatSheet-warn: mat-palette($mat-red);
 
+$mat-dark-theme-background: (
+  status-bar: #121212,
+  app-bar:    map_get($mat-grey, 900),
+  background: #121212,
+  hover:      rgba(white, 0.04),
+  card:       map_get($mat-grey, 800),
+  dialog:     map_get($mat-grey, 800),
+  disabled-button: rgba(white, 0.12),
+  raised-button: map-get($mat-grey, 800),
+  focused-button: $light-focused,
+  selected-button: map_get($mat-grey, 900),
+  selected-disabled-button: map_get($mat-grey, 800),
+  disabled-button-toggle: black,
+  unselected-chip: map_get($mat-grey, 700),
+  disabled-list-option: black,
+);
+
+@function my-mat-dark-theme($primary, $accent, $warn: mat-palette($mat-red)) {
+  @return (
+    primary: $primary,
+    accent: $accent,
+    warn: $warn,
+    is-dark: true,
+    foreground: $mat-dark-theme-foreground,
+    background: $mat-dark-theme-background,
+  );
+}
+
 // Create the theme object (a Sass map containing all of the palettes).
-$CSSCheatSheet-theme: mat-light-theme($CSSCheatSheet-primary, $CSSCheatSheet-accent, $CSSCheatSheet-warn);
+$CSSCheatSheet-theme: my-mat-dark-theme($CSSCheatSheet-primary, $CSSCheatSheet-accent, $CSSCheatSheet-warn);
 
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
@@ -27,9 +81,61 @@ $CSSCheatSheet-theme: mat-light-theme($CSSCheatSheet-primary, $CSSCheatSheet-acc
 
 /* You can add global styles to this file, and also import other style files */
 
+
+
 $borderRadius: 24px;
 
-$boxShadow: 0px 2px 2px 1px rgba(0, 0, 0, 0.2);
+$shadowColor: rgba(0, 0, 0, 0.6);
+$boxShadow: 0px 2px 2px 1px $shadowColor;
+
+
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+@mixin elevation() {
+
+}
+
+@function calculateElevation($level) {
+  $factor: 0;
+  @if ($level >= 10) {
+    $factor: 0.16;
+  }
+  @else if($level == 9) {
+    $factor: 0.15;
+  }
+  @else if($level == 8) {
+    $factor: 0.14;
+  }
+  @else if($level == 7) {
+    $factor: 0.12;
+  }
+  @else if($level == 6) {
+    $factor: 0.11;
+  }
+  @else if($level == 5) {
+    $factor: 0.09;
+  }
+  @else if($level == 4) {
+    $factor: 0.08;
+  }
+  @else if($level == 3) {
+    $factor: 0.07;
+  }
+  @else if($level == 2) {
+    $factor: 0.05;
+  }
+  @else {
+    $factor: 0;
+  }
+  $result: rgba(255, 255, 255, $factor);
+
+  @return $result;
+}
 
 html, body {
   height: 100%;
@@ -38,10 +144,13 @@ html, body {
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-weight: lighter;
+  //color: $CSSCheatSheet-dark-darker;
   max-width: 100vw;
   overflow: auto;
 
-  background: #EEEEEE;
+  background: $mdd-surface;
+  color: #FFFFFF;
 
   .mat-raised-button {
     -webkit-border-radius: $borderRadius;
@@ -55,5 +164,57 @@ body {
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
+  }
+  .mat-tab-header {
+    border: none;
+  }
+  .mat-tab-labels {
+    display: flex;
+    justify-content: space-evenly;
+  }
+
+  .mat-tab-label {
+    border-top-left-radius: 24px;
+    border-top-right-radius: 24px;
+    box-shadow: 3px 4px 8px $shadowColor;
+    margin-top: 5px;
+    background-color: calculateElevation(6);
+
+    .active {
+      font-weight: bold;
+    }
+
+    .mat-tab-label-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-evenly;
+      width: 100%;
+      img {
+        height: 40px;
+      }
+    }
+  }
+
+  .mat-tab-body {
+    max-height: 15em;
+    min-height: 15em;
+    border-radius: 8px;
+    border: 1px solid calculateElevation(4);
+  }
+  :not(pre) > code[class*="language-"], pre[class*="language-"] {
+    background-color: $CSSCheatSheet-dark-normal;
+  }
+
+  .mat-tab-body-content {
+    min-height: 15em;
+    //background-color: calculateElevation(2);
+
+    //background-color: #272822;
+    //color: mat-contrast($mat-blue-grey, 700);
+    //padding: 0 1em;
+  }
+
+  :not(pre) > code[class*=language-], pre[class*=language-] {
+    background-color: #00000000 !important;
   }
 }

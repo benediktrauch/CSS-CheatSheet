@@ -15,8 +15,11 @@ import { VerifyEmailComponent } from './components/verify-email/verify-email.com
 import { AppRoutingModule } from './app-routing.module';
 import {AuthService} from './shared/services/auth.service';
 import { ProfileComponent } from './components/profile/profile.component';
-import {MatButtonModule, MatCardModule} from '@angular/material';
+import {MatButtonModule, MatCardModule, MatTabsModule} from '@angular/material';
 import { SnippetComponent } from './shared/components/snippet/snippet.component';
+import { SourceComponent } from './shared/components/source/source.component';
+import {PrismModule} from '@ngx-prism/core';
+import { MenuComponent } from './shared/components/menu/menu.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +30,9 @@ import { SnippetComponent } from './shared/components/snippet/snippet.component'
     ForgotPasswordComponent,
     VerifyEmailComponent,
     ProfileComponent,
-    SnippetComponent
+    SnippetComponent,
+    SourceComponent,
+    MenuComponent
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
@@ -36,8 +41,10 @@ import { SnippetComponent } from './shared/components/snippet/snippet.component'
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
+    PrismModule,
     MatButtonModule,
-    MatCardModule
+    MatCardModule,
+    MatTabsModule
   ],
   exports: [
     SnippetComponent
