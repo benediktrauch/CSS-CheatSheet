@@ -1,0 +1,115 @@
+@import "~src/styles";
+
+
+.formGroup {
+  position: relative;
+
+  .editTitle {
+    margin: 0.5em 0 1em;
+
+    .mat-form-field {
+      min-width: 50%;
+      font-size: 1.5em;
+    }
+  }
+
+  .main {
+    margin: 0.5em 0 1em;
+
+    .mat-form-field {
+      width: 100%;
+    }
+  }
+
+  .code {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0.5em 0 1em;
+
+    .block {
+      width: 100%;
+      min-height: 15em;
+      margin: 0;
+      padding: 0;
+
+      .mat-form-field {
+        width: 100%;
+
+        textarea {
+          font-family: monospace;
+          font-size: 1.2em;
+          height: 15em;
+        }
+      }
+    }
+
+    @media screen and (min-width: 768px) {
+      flex-wrap: nowrap;
+      justify-content: space-between;
+
+      .block {
+        width: 49%;
+      }
+    }
+  }
+
+  .footer {
+    @include flex-center;
+
+    .tags {
+      width: 100%;
+      margin: 0.5em 0 1em;
+
+      .mat-form-field {
+        width: 100%;
+      }
+    }
+
+    .buttonRow {
+      button {
+        margin: 0 1em;
+      }
+    }
+  }
+
+  .editTitle, .main, .code, .footer {
+    transition: 0.5s;
+    opacity: 1;
+  }
+
+  .uploadAnimation {
+    display: none;
+    transition: 0.5s;
+    opacity: 0;
+  }
+
+  &.uploading {
+    .editTitle, .main, .code, .footer {
+      transition: 0.5s;
+      opacity: 0;
+    }
+
+    .uploadAnimation {
+      transition: 0.5s;
+      opacity: 1;
+
+      @include flex-center;
+
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      text-align: center;
+
+      .material-icons {
+        font-size: 10em;
+        width: 100%;
+        height: 100%;
+        margin: 3em;
+      }
+
+      .spinner {
+        position: absolute;
+      }
+    }
+  }
+}

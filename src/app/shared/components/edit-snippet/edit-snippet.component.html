@@ -1,0 +1,67 @@
+<form [formGroup]="snippetForm" (ngSubmit)="onSubmit()" [ngClass]="{'formGroup': true, 'uploading': uploading}">
+  <div class="uploadAnimation">
+    <mat-icon aria-hidden="false" aria-label="Upload">cloud_upload</mat-icon>
+    <mat-progress-spinner
+      class="spinner"
+      [color]="'primary'"
+      [diameter]="300"
+      [strokeWidth]="3"
+      [mode]="'indeterminate'">
+    </mat-progress-spinner>
+  </div>
+  <div class="editTitle">
+    <mat-form-field appearance="outline">
+      <mat-label>Titel</mat-label>
+      <input matInput placeholder="Titel" formControlName="title">
+      <mat-icon matSuffix>title</mat-icon>
+    </mat-form-field>
+  </div>
+
+  <div class="main">
+    <mat-form-field appearance="outline">
+      <mat-label>Description</mat-label>
+      <textarea matInput placeholder="Description" formControlName="description"></textarea>
+    </mat-form-field>
+  </div>
+  <div class="code">
+    <div class="block">
+      <mat-form-field appearance="outline">
+        <mat-label>HTML</mat-label>
+        <textarea matInput placeholder="HTML" formControlName="htmlSource"></textarea>
+      </mat-form-field>
+    </div>
+    <div class="block">
+      <mat-form-field appearance="outline">
+        <mat-label>CSS</mat-label>
+        <textarea matInput placeholder="CSS" formControlName="cssSource"></textarea>
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="footer">
+    <div class="tags">
+      <mat-form-field class="example-chip-list" appearance="outline">
+        <mat-label>Tags</mat-label>
+        <mat-chip-list #chipList aria-label="Tag selection">
+          <mat-chip *ngFor="let tag of tags" [selectable]="selectable"
+                    [removable]="removable" (removed)="remove(tag)">
+            {{tag.name}}
+            <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+          </mat-chip>
+          <input placeholder="New tag..."
+                 [matChipInputFor]="chipList"
+                 [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                 [matChipInputAddOnBlur]="addOnBlur"
+                 (matChipInputTokenEnd)="add($event)">
+        </mat-chip-list>
+      </mat-form-field>
+    </div>
+
+    <div class="buttonRow">
+      <button mat-stroked-button color="primary" *ngIf="!snippetForm.valid" (click)="checkForm()" type="button">
+        Add to Database
+      </button>
+      <button mat-raised-button color="primary" *ngIf="snippetForm.valid" type="submit">Add to Database</button>
+      <button mat-stroked-button color="warn" type="button" (click)="closeEdit()">Cancel</button>
+    </div>
+  </div>
+</form>
