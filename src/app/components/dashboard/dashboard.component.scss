@@ -8,26 +8,16 @@
   margin: 1em;
   padding: 1em;
   border-radius: 12px;
-  box-shadow: 0 2px 9px 2px $shadowColor;
 
   .code {
+    width: 100%;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-flow: row wrap;
     flex-wrap: wrap;
-
-    .result {
-      
-    }
-
-    .source {
-      min-height: 15em;
-      overflow: auto;
-    }
 
     .block {
       width: 100%;
+      min-height: 15em;
+      margin: 0;
       padding: 1em;
     }
 
@@ -37,7 +27,60 @@
       .block {
         width: 50%;
       }
-
     }
+
+
+    .result {
+      //min-height: 15em;
+      //overflow: auto;
+
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+
+      .snippetWrapper {
+        background-color: rgb(255, 255, 255);
+        color: #000;
+        min-height: 15em;
+        //width: 100%;
+
+        border-radius: $smallBorderRadius;
+
+        @include flex-center;
+
+        transition: 0.5s;
+
+        &.nightMode {
+          transition: 0.5s;
+          background-color: rgba(0, 0, 0, 0);
+          color: #FFF;
+        }
+      }
+
+      //csscs-snippet {
+      //  margin: auto;
+      //}
+
+
+      .themeSwitcher {
+        //width: 100%;
+        //margin: 0 0 1em ;
+        //@include flex-center;
+
+        justify-self: flex-start;
+        margin: auto;
+      }
+    }
+
+    .source {
+      //min-height: 15em;
+      //overflow: auto;
+    }
+
+
+  }
+
+  .mat-form-field-wrapper {
+    padding-bottom: 0 !important;
   }
 }

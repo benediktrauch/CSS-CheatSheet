@@ -3,30 +3,33 @@
   <!--<button mat-raised-button color="primary">Click me!</button>-->
 
   <div *ngIf="isLoggedIn()">
-    Add new
+    <button mat-stroked-button color="primary">Add new</button>
   </div>
 
-  <div *ngFor="let snippet of codeSnippets" class="snippet">
+  <div *ngFor="let snippet of codeSnippets" class="snippet mdc-elevation--z4">
     <h1 class="header">{{snippet.title}}</h1>
     <div class="main">
       <p>{{snippet.desc}}</p>
     </div>
     <div class="code">
       <div class="block result">
-        <!--
-          <div
-          [innerHTML]="makeHtmlTrusted(snippet.code.htmlSource)"
-          class="innerHtml"
-          [style]="makeStyleTrusted(snippet.code.cssSource)">
-        </div>-->
-        <csscs-snippet [snippet]="snippet"></csscs-snippet>
-
+        <div class="themeSwitcher">
+          <mat-slide-toggle
+            id="nightMode-switch"
+            #switchControl
+            class="example-margin"
+            [color]="color"
+            [checked]="nightMode"
+            (change)="toggleNightMode()">
+            <label for="nightMode-switch">Dark Theme off/on</label>
+          </mat-slide-toggle>
+        </div>
+        <div [ngClass]="{'snippetWrapper':true, 'nightMode': nightMode, 'mdc-elevation--z8': !nightMode}">
+          <csscs-snippet [snippet]="snippet"></csscs-snippet>
+        </div>
       </div>
-      <!--<code class="source">{{snippet.code.html}}</code>-->
       <div class="block source">
-
         <csscs-source [snippet]="snippet"></csscs-source>
-
       </div>
     </div>
     <div class="footer">Bla bla</div>

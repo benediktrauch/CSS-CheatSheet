@@ -32,7 +32,7 @@ export class AuthService {
   }
   static get isLoggedIn(): boolean {
     const user = JSON.parse(localStorage.getItem('user'));
-    console.log(user);
+    // console.log(user);
     return (user !== null && user.emailVerified !== false);
   }
 // Sign in with email/password

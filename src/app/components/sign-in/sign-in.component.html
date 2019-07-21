@@ -6,40 +6,37 @@
         <!--<input type="text" class="formControl" placeholder="Username" #userName required>-->
       <!--</div>-->
 
-      <div class="mdc-text-field mdc-text-field--outlined">
-        <input class="mdc-text-field__input" id="text-field-hero-input" placeholder="Username" #userName required>
-        <div class="mdc-notched-outline">
-          <div class="mdc-notched-outline__leading"></div>
-          <div class="mdc-notched-outline__notch">
-            <label for="text-field-hero-input" class="mdc-floating-label">Name</label>
-          </div>
-          <div class="mdc-notched-outline__trailing"></div>
-        </div>
-      </div>
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="formGroup">
+        <mat-form-field class="example-full-width" appearance="outline">
+          <mat-label>E-Mail</mat-label>
+          <input matInput placeholder="E-Mail" formControlName="email" id="email" type="email">
+          <mat-icon matSuffix>alternate_email</mat-icon>
 
-      <!--<div class="formGroup">-->
-        <!--<input type="password" class="formControl" placeholder="Password" #userPassword required>-->
-      <!--</div>-->
+          <mat-error *ngIf="email.hasError('email') && !email.hasError('required')">
+            Please enter a valid email address
+          </mat-error>
+          <mat-error *ngIf="email.hasError('required')">
+            Email is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="example-full-width" appearance="outline">
 
-      <div class="mdc-text-field mdc-text-field--outlined">
-        <input class="mdc-text-field__input"
-               type="password" placeholder="Password" #userPassword required>
-        <div class="mdc-notched-outline">
-          <div class="mdc-notched-outline__leading"></div>
-          <div class="mdc-notched-outline__notch">
-            <label for="text-field-hero-input" class="mdc-floating-label">Password</label>
-          </div>
-          <div class="mdc-notched-outline__trailing"></div>
-        </div>
-      </div>
+          <mat-label>Password</mat-label>
+          <input matInput placeholder="Password" formControlName="password" id="password" type="password">
+          <mat-icon matSuffix>vpn_key</mat-icon>
 
-      <!-- Calling SignIn Api from AuthService -->
-      <div class="formGroup">
-        <!--<button class="mdc-button mdc-button&#45;&#45;raised"-->
-                <!--(click)="authService.SignIn(userName.value, userPassword.value)">-->
-          <!--Log in-->
-        <!--</button>-->
-      </div>
+          <mat-error *ngIf="password.value.length < 6">
+            Enter a strong password
+          </mat-error>
+          <mat-error *ngIf="email.hasError('required')">
+            Password is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+
+        <button mat-stroked-button color="primary" *ngIf="!loginForm.valid" (click)="checkForm()">Login</button>
+        <button mat-raised-button color="primary" *ngIf="loginForm.valid" type="submit">Login</button>
+      </form>
+
       <div class="formGroup">
         <span class="or"><span class="orInner">Or</span></span>
       </div>
@@ -88,16 +85,15 @@
               </g>
             </g>
           </svg>
-
           Sign in with Google
         </button>
       </div>
-      <div class="forgotPassword">
-        <span routerLink="/forgot-password">Forgot Password?</span>
+      <div class="formGroup forgotPassword">
+        <span class="routerLink" routerLink="/forgot-password">Forgot Password?</span>
       </div>
     </div>
-    <div class="redirectToLogin">
-      <span>Don't have an account?<span class="redirect" routerLink="/register-user"> Sign Up</span></span>
+    <div class="formGroup redirectToLogin">
+      <span>Don't have an account?<span class="routerLink redirect" routerLink="/register-user"> Sign Up</span></span>
     </div>
   </div>
 </div>

@@ -1,7 +1,8 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 import {AuthService} from '../../shared/services/auth.service';
 import {Snippet} from '../../shared/services/snippet';
 import {DomSanitizer} from '@angular/platform-browser';
+import {MDCSwitch} from '@material/switch/component';
 
 @Component({
   selector: 'csscs-dashboard',
@@ -11,7 +12,11 @@ import {DomSanitizer} from '@angular/platform-browser';
 })
 export class DashboardComponent implements OnInit {
 
+  @ViewChild('switchControl', {static: false}) switchControl: MDCSwitch;
   codeSnippets: Snippet[];
+  nightMode = true;
+
+  color = 'primary';
 
   constructor(public authService: AuthService,
               private sanitizer: DomSanitizer) {
@@ -48,6 +53,7 @@ export class DashboardComponent implements OnInit {
         desc: 'Here comes the text'
       }
     ];
+
   }
 
   // makeStyleTrusted(style) {
@@ -61,4 +67,8 @@ export class DashboardComponent implements OnInit {
     return AuthService.isLoggedIn;
   }
 
+  toggleNightMode() {
+    this.nightMode = !this.nightMode;
+    // this.switchControl.checked = this.nightMode;
+  }
 }

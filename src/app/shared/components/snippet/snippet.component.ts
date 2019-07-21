@@ -19,10 +19,10 @@ export class SnippetComponent implements OnInit {
     console.log(this.snippet);
 
     console.log(JSON.parse(this.snippet.code.cssSource));
-    this.currentStyles = {
-      color: 'red'
-    };
-    console.log(this.currentStyles);
+    // this.currentStyles = {
+    //   color: 'red'
+    // };
+    // console.log(this.currentStyles);
 
     this.currentStyles = JSON.parse(this.snippet.code.cssSource);
   }

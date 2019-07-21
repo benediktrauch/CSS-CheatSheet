@@ -4,13 +4,24 @@
 
 @import '~prismjs/themes/prism-okaidia.css';
 
+$CSSCheatSheet-primary: mat-palette($mat-green, 500);
+$CSSCheatSheet-accent: mat-palette($mat-pink, A200, A100, A400);
+$CSSCheatSheet-dark-normal: mat-color($mat-blue-grey, 900);
+$CSSCheatSheet-dark-lighter: #4f5b62;
+$CSSCheatSheet-dark-darker: #000a12;
+
 @import "~@material/animation/functions";
 @import "~@material/animation/variables";
 @import "~@material/floating-label/dist/mdc.floating-label.css";
 //@import "~@material/floating-label/mdc-floating-label";
 @import "~@material/form-field/dist/mdc.form-field.css";
 @import "~@material/button/dist/mdc.button.css";
+//@import "~@material/button/mdc-button";
 @import "~@material/textfield/dist/mdc.textfield.css";
+@import "~@material/icon-button/dist/mdc.icon-button.css";
+//@import "~@material/icon-button/mdc-icon-button";
+@import "~@material/elevation/dist/mdc.elevation.css";
+@import "~@material/switch/dist/mdc.switch.css";
 
 //@import '~@material/textfield/mdc-text-field';
 
@@ -32,11 +43,7 @@
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
-$CSSCheatSheet-primary: mat-palette($mat-green, 500);
-$CSSCheatSheet-accent: mat-palette($mat-pink, A200, A100, A400);
-$CSSCheatSheet-dark-normal: mat-color($mat-blue-grey, 900);
-$CSSCheatSheet-dark-lighter: #4f5b62;
-$CSSCheatSheet-dark-darker: #000a12;
+
 
 $mdd-surface: #121212;
 
@@ -84,6 +91,7 @@ $CSSCheatSheet-theme: my-mat-dark-theme($CSSCheatSheet-primary, $CSSCheatSheet-a
 
 
 $borderRadius: 24px;
+$smallBorderRadius: 8px;
 
 $shadowColor: rgba(0, 0, 0, 0.6);
 $boxShadow: 0px 2px 2px 1px $shadowColor;
@@ -147,12 +155,14 @@ body {
   font-weight: lighter;
   //color: $CSSCheatSheet-dark-darker;
   max-width: 100vw;
-  overflow: auto;
+  overflow-y: auto;
+  overflow-x: hidden;
+
 
   background: $mdd-surface;
   color: #FFFFFF;
 
-  .mat-raised-button {
+  .mat-raised-button, .mat-stroked-button, .mat-button, .mat-flat-button {
     -webkit-border-radius: $borderRadius;
     -moz-border-radius: $borderRadius;
     border-radius: $borderRadius;
@@ -176,9 +186,9 @@ body {
   .mat-tab-label {
     border-top-left-radius: 24px;
     border-top-right-radius: 24px;
-    box-shadow: 3px 4px 8px $shadowColor;
     margin-top: 5px;
     background-color: calculateElevation(6);
+    box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
 
     .active {
       font-weight: bold;
@@ -198,9 +208,15 @@ body {
   .mat-tab-body {
     max-height: 15em;
     min-height: 15em;
-    border-radius: 8px;
+    border-radius: $smallBorderRadius;
     border: 1px solid calculateElevation(4);
+    background-color: calculateElevation(2);
   }
+
+  .mat-tab-body-wrapper {
+    box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
+  }
+
   :not(pre) > code[class*="language-"], pre[class*="language-"] {
     background-color: $CSSCheatSheet-dark-normal;
   }

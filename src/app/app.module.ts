@@ -15,11 +15,21 @@ import { VerifyEmailComponent } from './components/verify-email/verify-email.com
 import { AppRoutingModule } from './app-routing.module';
 import {AuthService} from './shared/services/auth.service';
 import { ProfileComponent } from './components/profile/profile.component';
-import {MatButtonModule, MatCardModule, MatTabsModule} from '@angular/material';
+import {
+  MatAutocompleteModule,
+  MatButtonModule,
+  MatCardModule, MatFormFieldModule,
+  MatIconModule,
+  MatInputModule,
+  MatMenuModule,
+  MatSlideToggleModule,
+  MatTabsModule
+} from '@angular/material';
 import { SnippetComponent } from './shared/components/snippet/snippet.component';
 import { SourceComponent } from './shared/components/source/source.component';
 import {PrismModule} from '@ngx-prism/core';
 import { MenuComponent } from './shared/components/menu/menu.component';
+import {ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -44,7 +54,14 @@ import { MenuComponent } from './shared/components/menu/menu.component';
     PrismModule,
     MatButtonModule,
     MatCardModule,
-    MatTabsModule
+    MatTabsModule,
+    MatInputModule,
+    MatSlideToggleModule,
+    ReactiveFormsModule,
+    MatMenuModule,
+    MatIconModule,
+    MatAutocompleteModule,
+    MatFormFieldModule
   ],
   exports: [
     SnippetComponent

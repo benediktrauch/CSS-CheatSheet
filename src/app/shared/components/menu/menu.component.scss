@@ -1,8 +1,27 @@
 @import "~src/styles";
 
 nav {
-  height: 3em;
   background-color: calculateElevation(10);
-  box-shadow: $boxShadow;
 
+  padding: 0.3em 0;
+
+  @media screen and (min-width: 768px) {
+    padding: 0.3em 2em;
+  }
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  .formFieldNoHint {
+    .mat-form-field-wrapper {
+      padding-bottom: 0;
+    }
+  }
+
+  .links {
+    a {
+      color: #FFFFFF;
+    }
+  }
 }
