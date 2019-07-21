@@ -1,5 +1,5 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 import {RouterModule, Routes} from '@angular/router';
 import {VerifyEmailComponent} from './components/verify-email/verify-email.component';
 import {ForgotPasswordComponent} from './components/forgot-password/forgot-password.component';
@@ -11,21 +11,22 @@ import {AuthGuard} from './shared/guard/auth.guard';
 import {ProfileComponent} from './components/profile/profile.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/dashboard', pathMatch: 'full'},
-  { path: 'dashboard', component: DashboardComponent},
-  { path: 'sign-in', component: SignInComponent},
-  { path: 'register-user', component: SignUpComponent},
-  { path: 'forgot-password', component: ForgotPasswordComponent},
-  { path: 'profile', component: ProfileComponent, canActivate: [SecureInnerPagesGuard] },
-  { path: 'verify-email-address', component: VerifyEmailComponent}
+  {path: '', redirectTo: '/dashboard', pathMatch: 'full'},
+  {path: 'dashboard', component: DashboardComponent},
+  {path: 'sign-in', component: SignInComponent},
+  {path: 'register-user', component: SignUpComponent},
+  {path: 'forgot-password', component: ForgotPasswordComponent},
+  {path: 'profile', component: ProfileComponent, canActivate: [SecureInnerPagesGuard]},
+  {path: 'verify-email-address', component: VerifyEmailComponent}
 ];
 
 @NgModule({
   declarations: [],
   imports: [
     CommonModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes, {anchorScrolling: 'enabled'})
   ],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+}

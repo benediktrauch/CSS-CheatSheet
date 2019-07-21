@@ -1,5 +1,5 @@
 export interface Snippet {
-  id: any;
+  id?: any;
   title: string;
   desc: string;
   code: {

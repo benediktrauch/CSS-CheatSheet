@@ -1,5 +1,10 @@
 @import "~src/styles";
 
+#newSnippet {
+  scroll-behavior: smooth;
+  width: 100%;
+}
+
 .snippet {
   width: 100%;
   background-color: calculateElevation(6);

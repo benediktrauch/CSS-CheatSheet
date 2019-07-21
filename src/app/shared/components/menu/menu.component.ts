@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../../services/auth.service';
 import {Observable} from 'rxjs';
-import {FormControl} from '@angular/forms';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {map, startWith} from 'rxjs/operators';
 
 @Component({
@@ -19,6 +19,10 @@ export class MenuComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.myControl = new FormControl('', [
+      Validators.required
+    ]);
+    
     this.filteredOptions = this.myControl.valueChanges.pipe(
       startWith(''),
       map(value => this._filter(value))

@@ -3,10 +3,15 @@
   <!--<button mat-raised-button color="primary">Click me!</button>-->
 
   <div *ngIf="isLoggedIn()">
-    <button mat-stroked-button color="primary">Add new</button>
+    <a mat-stroked-button color="primary" (click)="toggleEditMode()" href="dashboard#newSnippet" *ngIf="!editMode ">Add new</a>
   </div>
 
-  <div *ngFor="let snippet of codeSnippets" class="snippet mdc-elevation--z4">
+  <span id="newSnippet"></span>
+  <div class="snippet mdc-elevation--z4" *ngIf="editMode">
+    <csscs-edit-snippet (cancelEdit)="toggleEditMode()" (submitEdit)="addSnippet($event)"></csscs-edit-snippet>
+  </div>
+
+  <div *ngFor="let snippet of $codeSnippets | async" class="snippet mdc-elevation--z4">
     <h1 class="header">{{snippet.title}}</h1>
     <div class="main">
       <p>{{snippet.desc}}</p>

@@ -1,8 +1,9 @@
-import {Component, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
+import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {AuthService} from '../../shared/services/auth.service';
 import {Snippet} from '../../shared/services/snippet';
 import {DomSanitizer} from '@angular/platform-browser';
-import {MDCSwitch} from '@material/switch/component';
+import {DataService} from '../../shared/services/data.service';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'csscs-dashboard',
@@ -12,48 +13,37 @@ import {MDCSwitch} from '@material/switch/component';
 })
 export class DashboardComponent implements OnInit {
 
-  @ViewChild('switchControl', {static: false}) switchControl: MDCSwitch;
-  codeSnippets: Snippet[];
+  // @ViewChild('switchControl', {static: false}) switchControl: MDCSwitch;
+  $codeSnippets: Observable<Snippet[]>;
   nightMode = true;
 
   color = 'primary';
+  editMode: boolean;
 
   constructor(public authService: AuthService,
+              private dataService: DataService,
               private sanitizer: DomSanitizer) {
   }
 
   ngOnInit() {
-    this.codeSnippets = [
-      {
-        id: '2sfuwh7rzhsif',
-        title: 'Box Shadow',
-        code: {
-          html: `<div class="box">Box</div>`,
-          css: `
-.box {
-  box-shadow: 0px 2px 2px 1px rgba(0, 0, 0, 0.2);
-}
-`,
-          htmlSource: `<div class="box">Box</div>`,
-          cssSource: `{"box-shadow": "0px 2px 2px 1px rgba(0, 0, 0, 0.2)"}`,
-          lang: 'web'
-        },
-        desc: 'Here comes the text'
-      },
-      {
-        id: 'ss32k7rzhsif',
-        title: 'Cover',
-        code: {
-          html: `<div class="color"></div>`,
-          css: `.color{ color: red;}`,
-          htmlSource: `<div>Color</div>`, // style="background: blue"
-          cssSource: `{"color": "red"}`,
-          lang: 'web'
-        },
-        desc: 'Here comes the text'
-      }
-    ];
+    this.$codeSnippets = this.dataService.getSnippets();
+  }
 
+  toggleEditMode() {
+    this.editMode = !this.editMode;
+  }
+
+  addSnippet(event) {
+    console.log(event);
+    this.dataService.addSnippet(event);
+
+    setTimeout(() => {
+      this.toggleEditMode();
+    }, 2500);
+  }
+
+  updateSnippet() {
+    this.dataService.updateSnippet();
   }
 
   // makeStyleTrusted(style) {

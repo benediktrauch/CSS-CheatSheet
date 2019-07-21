@@ -18,10 +18,10 @@ import { ProfileComponent } from './components/profile/profile.component';
 import {
   MatAutocompleteModule,
   MatButtonModule,
-  MatCardModule, MatFormFieldModule,
+  MatCardModule, MatChipsModule, MatFormFieldModule,
   MatIconModule,
   MatInputModule,
-  MatMenuModule,
+  MatMenuModule, MatProgressSpinnerModule,
   MatSlideToggleModule,
   MatTabsModule
 } from '@angular/material';
@@ -30,6 +30,7 @@ import { SourceComponent } from './shared/components/source/source.component';
 import {PrismModule} from '@ngx-prism/core';
 import { MenuComponent } from './shared/components/menu/menu.component';
 import {ReactiveFormsModule} from '@angular/forms';
+import { EditSnippetComponent } from './shared/components/edit-snippet/edit-snippet.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import {ReactiveFormsModule} from '@angular/forms';
     ProfileComponent,
     SnippetComponent,
     SourceComponent,
-    MenuComponent
+    MenuComponent,
+    EditSnippetComponent
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
@@ -61,6 +63,8 @@ import {ReactiveFormsModule} from '@angular/forms';
     MatMenuModule,
     MatIconModule,
     MatAutocompleteModule,
+    MatChipsModule,
+    MatProgressSpinnerModule,
     MatFormFieldModule
   ],
   exports: [
