@@ -9,11 +9,58 @@
     <label for="nightMode-switch">Dark Theme off/on</label>
   </mat-slide-toggle>
 </div>-->
+
 <div
   [innerHTML]="makeHtmlTrusted(snippet.code.htmlSource)"
   class="innerHtml"
   [ngStyle]="currentStyles">
-  <!--[style]="makeStyleTrusted(snippet.code.cssSource)">-->
-  <!--style="{{snippet.code.cssSource}}">-->
-  <!--[style]="makeStyleTrusted(snippet.code.cssSource)">-->
 </div>
+
+<!--
+<html lang="en">
+<head>
+  &lt;!&ndash;<title>CSSCheatSheet</title>&ndash;&gt;
+  &lt;!&ndash;<base href="/">&ndash;&gt;
+
+  &lt;!&ndash;<meta name="viewport" content="width=device-width, initial-scale=1">&ndash;&gt;
+  &lt;!&ndash;<link rel="icon" type="image/x-icon" href="favicon.ico">&ndash;&gt;
+  &lt;!&ndash;<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500&display=swap" rel="stylesheet">&ndash;&gt;
+  &lt;!&ndash;<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">&ndash;&gt;
+
+  <style>{{ snippet.code.cssSource}}</style>
+  <style>
+    h1 {
+      color: red;
+    }
+
+    p {
+      color: blue;
+    }
+  </style>
+  &lt;!&ndash;{{ getStyleWrapper(snippet.code.cssSource) }}&ndash;&gt;
+</head>
+
+<body>
+<div
+  [innerHTML]="makeHtmlTrusted(snippet.code.htmlSource)"
+  class="innerHtml"
+  [ngStyle]="currentStyles">
+  &lt;!&ndash;[style]="makeStyleTrusted(snippet.code.cssSource)">&ndash;&gt;
+  &lt;!&ndash;style="{{snippet.code.cssSource}}">&ndash;&gt;
+  &lt;!&ndash;[style]="makeStyleTrusted(snippet.code.cssSource)">&ndash;&gt;
+</div>
+<style>.color{ color: red;}</style>
+<div
+  [innerHTML]="getCode(snippet.code.cssSource, snippet.code.htmlSource)"
+  class="innerHtml"
+  [ngStyle]="">
+  &lt;!&ndash;[style]="makeStyleTrusted(snippet.code.cssSource)">&ndash;&gt;
+  &lt;!&ndash;style="{{snippet.code.cssSource}}">&ndash;&gt;
+  &lt;!&ndash;[style]="makeStyleTrusted(snippet.code.cssSource)">&ndash;&gt;
+</div>
+
+{{snippet.code.htmlSource}}
+
+</body>
+</html>
+-->

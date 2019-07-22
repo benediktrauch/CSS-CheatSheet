@@ -35,7 +35,7 @@ export class DataService {
       code: {
         html: `<div class="color"></div>`,
         css: `.color{ color: red;}`,
-        htmlSource: `<div>Color</div>`, // style="background: blue"
+        htmlSource: `<div class="color">Color</div>`, // style="background: blue"
         cssSource: `{"color": "red"}`,
         lang: 'web'
       },

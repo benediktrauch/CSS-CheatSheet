@@ -13,7 +13,8 @@ export class SnippetComponent implements OnInit {
 
   currentStyles: {};
 
-  constructor(private sanitizer: DomSanitizer) { }
+  constructor(private sanitizer: DomSanitizer) {
+  }
 
   ngOnInit() {
     console.log(this.snippet);
@@ -30,8 +31,12 @@ export class SnippetComponent implements OnInit {
   makeStyleTrusted(style) {
     return this.sanitizer.bypassSecurityTrustStyle(style);
   }
+
   makeHtmlTrusted(html) {
     return this.sanitizer.bypassSecurityTrustHtml(html);
   }
 
+  getCode(currentStyles, html) {
+    return `<style>${currentStyles.toString()}</style>${html}`;
+  }
 }
