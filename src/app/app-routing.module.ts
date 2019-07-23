@@ -11,7 +11,8 @@ import {AuthGuard} from './shared/guard/auth.guard';
 import {ProfileComponent} from './components/profile/profile.component';
 
 const routes: Routes = [
-  {path: '', redirectTo: '/dashboard', pathMatch: 'full'},
+  // {path: '', redirectTo: '/dashboard', pathMatch: 'full'},
+  {path: '', component: DashboardComponent},
   {path: 'dashboard', component: DashboardComponent},
   {path: 'sign-in', component: SignInComponent},
   {path: 'register-user', component: SignUpComponent},
