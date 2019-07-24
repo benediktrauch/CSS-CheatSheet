@@ -33,7 +33,7 @@ export class DataService {
       id: 'ss32k7rzhsif',
       title: 'Cover',
       code: {
-        html: `<div class="color"></div>`,
+        html: `<div class="color">Colored Text</div>`,
         css: `.color{ color: red;}`,
         htmlSource: `<div class="color">Color</div>`, // style="background: blue"
         cssSource: `{"color": "red"}`,

@@ -1,8 +1,9 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
 import {Snippet} from '../../services/snippet';
 import {DomSanitizer} from '@angular/platform-browser';
 
 @Component({
+  // encapsulation: ViewEncapsulation.None,
   selector: 'csscs-snippet',
   templateUrl: './snippet.component.html',
   styleUrls: ['./snippet.component.scss']
@@ -19,13 +20,13 @@ export class SnippetComponent implements OnInit {
   ngOnInit() {
     console.log(this.snippet);
 
-    console.log(JSON.parse(this.snippet.code.cssSource));
+    // console.log(JSON.parse(this.snippet.code.cssSource));
     // this.currentStyles = {
     //   color: 'red'
     // };
     // console.log(this.currentStyles);
 
-    this.currentStyles = JSON.parse(this.snippet.code.cssSource);
+    // this.currentStyles = JSON.parse(this.snippet.code.cssSource);
   }
 
   makeStyleTrusted(style) {
@@ -36,7 +37,25 @@ export class SnippetComponent implements OnInit {
     return this.sanitizer.bypassSecurityTrustHtml(html);
   }
 
+  getCSS(currentStyles) {
+    return this.makeHtmlTrusted(`<style type="text/css">${currentStyles}</style>`);
+  }
+
   getCode(currentStyles, html) {
-    return `<style>${currentStyles.toString()}</style>${html}`;
+
+    const code = this.makeHtmlTrusted(`
+    <html lang="en">
+    <head>
+    <style type="text/css">${currentStyles}</style>
+</head>
+<body>
+<div [innerHTML]="${this.makeHtmlTrusted(html)}"></div>
+</body>
+</html>
+`);
+
+    console.log(code);
+
+    return code;
   }
 }
