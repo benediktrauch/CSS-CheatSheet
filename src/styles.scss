@@ -1,7 +1,6 @@
 // Custom Theming for Angular Material
 // For more information: https://material.angular.io/guide/theming
 @import '~@angular/material/theming';
-
 @import '~prismjs/themes/prism-okaidia.css';
 
 $CSSCheatSheet-primary: mat-palette($mat-green, 500);
@@ -9,6 +8,7 @@ $CSSCheatSheet-accent: mat-palette($mat-pink, A200, A100, A400);
 $CSSCheatSheet-dark-normal: mat-color($mat-blue-grey, 900);
 $CSSCheatSheet-dark-lighter: #4f5b62;
 $CSSCheatSheet-dark-darker: #000a12;
+$CSSCheatSheet-primaryColor: mat-color($mat-green, 500);
 
 @import "~@material/animation/functions";
 @import "~@material/animation/variables";
@@ -52,11 +52,11 @@ $CSSCheatSheet-warn: mat-palette($mat-red);
 
 $mat-dark-theme-background: (
   status-bar: #121212,
-  app-bar:    map_get($mat-grey, 900),
+  app-bar: map_get($mat-grey, 900),
   background: #121212,
-  hover:      rgba(white, 0.04),
-  card:       map_get($mat-grey, 800),
-  dialog:     map_get($mat-grey, 800),
+  hover: rgba(white, 0.04),
+  card: map_get($mat-grey, 800),
+  dialog: map_get($mat-grey, 800),
   disabled-button: rgba(white, 0.12),
   raised-button: map-get($mat-grey, 800),
   focused-button: $light-focused,
@@ -89,7 +89,6 @@ $CSSCheatSheet-theme: my-mat-dark-theme($CSSCheatSheet-primary, $CSSCheatSheet-a
 /* You can add global styles to this file, and also import other style files */
 
 
-
 $borderRadius: 24px;
 $smallBorderRadius: 8px;
 
@@ -112,32 +111,23 @@ $boxShadow: 0px 2px 2px 1px $shadowColor;
   $factor: 0;
   @if ($level >= 10) {
     $factor: 0.16;
-  }
-  @else if($level == 9) {
+  } @else if ($level == 9) {
     $factor: 0.15;
-  }
-  @else if($level == 8) {
+  } @else if ($level == 8) {
     $factor: 0.14;
-  }
-  @else if($level == 7) {
+  } @else if ($level == 7) {
     $factor: 0.12;
-  }
-  @else if($level == 6) {
+  } @else if ($level == 6) {
     $factor: 0.11;
-  }
-  @else if($level == 5) {
+  } @else if ($level == 5) {
     $factor: 0.09;
-  }
-  @else if($level == 4) {
+  } @else if ($level == 4) {
     $factor: 0.08;
-  }
-  @else if($level == 3) {
+  } @else if ($level == 3) {
     $factor: 0.07;
-  }
-  @else if($level == 2) {
+  } @else if ($level == 2) {
     $factor: 0.05;
-  }
-  @else {
+  } @else {
     $factor: 0;
   }
   $result: rgba(255, 255, 255, $factor);
@@ -153,7 +143,6 @@ body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
   font-weight: lighter;
-  //color: $CSSCheatSheet-dark-darker;
   max-width: 100vw;
   overflow-y: auto;
   overflow-x: hidden;
@@ -162,6 +151,110 @@ body {
 
   background: $mdd-surface;
   color: #FFFFFF;
+
+  .csscslogo {
+    .polyline {
+      fill: none;
+      stroke: $CSSCheatSheet-dark-lighter;
+      stroke-width: 1;
+      stroke-linecap: round;
+
+
+      stroke-dasharray: 0;
+      stroke-dashoffset: 0;
+
+      &.outline {
+        stroke-dasharray: 135;
+        stroke-dashoffset: 135;
+        animation: dashAnimation 3s linear forwards;
+      }
+
+      &.inline {
+        stroke-dasharray: 91;
+        stroke-dashoffset: 91;
+        animation: dashAnimation 2.2s 0.8s linear forwards;
+      }
+
+      &.circle {
+        stroke-dasharray: 141;
+        stroke-dashoffset: 283;
+        stroke: $CSSCheatSheet-dark-lighter;
+        stroke-opacity: 1;
+        //fill: $CSSCheatSheet-dark-normal;
+        //fill-opacity: 0;
+        //animation: dashAnimation 1.5s 3s linear forwards;
+        //animation: dashAnimationCircle 1.5s 3s linear forwards;
+      }
+
+      &.background {
+        //display: none;
+        fill: $CSSCheatSheet-dark-lighter;
+        box-shadow: $boxShadow;
+      }
+    }
+
+    &:hover {
+      .polyline {
+        stroke-dasharray: 0;
+        stroke-dashoffset: 0;
+        &.outline {
+          //animation: rainbowAnimation 3s linear infinite;
+        }
+
+        &.inline {
+          //animation: rainbowAnimation 3s linear infinite;
+        }
+
+        &.circle {
+          //animation: rainbowAnimation 3s linear infinite;
+          stroke: $CSSCheatSheet-dark-lighter;
+          stroke-opacity: 1;
+          animation: pulseAnimation 2s ease-in-out infinite;
+        }
+      }
+    }
+
+    @keyframes dashAnimation {
+      to {
+        stroke-dashoffset: 0;
+        stroke: $CSSCheatSheet-primaryColor;
+      }
+    }
+    @keyframes dashAnimationCircle {
+      to {
+        stroke-dashoffset: 0;
+        fill-opacity: 1;
+      }
+    }
+
+    @keyframes pulseAnimation {
+      30% {
+        //stroke: $CSSCheatSheet-dark-darker;
+        stroke-opacity: 0;
+      }
+    }
+
+    @keyframes rainbowAnimation {
+      15% {
+        stroke: $CSSCheatSheet-primaryColor;
+      }
+      30% {
+        stroke: yellow;
+      }
+      45% {
+        stroke: red;
+      }
+      60% {
+        stroke: blueviolet;
+      }
+      75% {
+        stroke: blue;
+      }
+      90% {
+        stroke: $CSSCheatSheet-primaryColor;
+      }
+    }
+  }
 
   .mat-raised-button, .mat-stroked-button, .mat-button, .mat-flat-button {
     -webkit-border-radius: $borderRadius;
@@ -176,9 +269,11 @@ body {
     align-items: center;
     flex-wrap: wrap;
   }
+
   .mat-tab-header {
     border: none;
   }
+
   .mat-tab-labels {
     display: flex;
     justify-content: space-evenly;
@@ -189,7 +284,7 @@ body {
     border-top-right-radius: 24px;
     margin-top: 5px;
     background-color: calculateElevation(6);
-    box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
 
     .active {
       font-weight: bold;
@@ -200,6 +295,7 @@ body {
       align-items: center;
       justify-content: space-evenly;
       width: 100%;
+
       img {
         height: 40px;
       }
@@ -211,14 +307,13 @@ body {
     min-height: 15em;
     border-radius: $smallBorderRadius;
     border: 1px solid calculateElevation(4);
-    background-color: rgba(0,0,0,.25);
-
+    background-color: rgba(0, 0, 0, .25);
   }
 
   .mat-tab-body-wrapper {
     border-radius: $smallBorderRadius;
     box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
-    background-color: rgba(0,0,0,.25);
+    background-color: rgba(0, 0, 0, .25);
   }
 
   :not(pre) > code[class*="language-"], pre[class*="language-"] {
@@ -227,18 +322,22 @@ body {
 
   .mat-tab-body-content {
     min-height: 15em;
-    //background-color: calculateElevation(2);
-
-    //background-color: #272822;
-    //color: mat-contrast($mat-blue-grey, 700);
-    //padding: 0 1em;
   }
 
   :not(pre) > code[class*=language-], pre[class*=language-] {
     background-color: #00000000 !important;
   }
 
-  .mat-form-field-appearance-outline .mat-form-field-wrapper {
-    padding-bottom: 0 !important;
+  .darkmodeFab {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    margin: 1em;
+    z-index: 3;
+  }
+
+
+  .formFieldNoHint .mat-form-field-wrapper {
+    padding-bottom: 0;
   }
 }

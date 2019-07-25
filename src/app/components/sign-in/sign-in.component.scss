@@ -2,13 +2,22 @@
 
 .googleBtn {
   background-color: #FFFFFF;
-  color: $CSSCheatSheet-dark-normal;
+  color: rgba(0, 0, 0, 0.54);
   display: flex;
   align-items: center;
   justify-content: flex-start;
   border: none;
   border-radius: 5px;
   padding: 0 1em 0 0;
+  text-transform: uppercase;
+  font-size: 14px;
+  transition: 0.5s;
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.9);
+    color: rgba(0, 0, 0, 0.68);
+    transition: 0.5s;
+  }
 }
 
 .signinPage {
@@ -38,6 +47,10 @@
         width: 20em;
       }
     }
+
+    //.mat-form-field-appearance-outline .mat-form-field-subscript-wrapper {
+    //  padding: 1.5em 1em;
+    //}
   }
 
   .routerLink {

@@ -4,6 +4,7 @@ import {Snippet} from '../../shared/services/snippet';
 import {DomSanitizer} from '@angular/platform-browser';
 import {DataService} from '../../shared/services/data.service';
 import {Observable} from 'rxjs';
+import {DarkModeService} from '../../shared/services/dark-mode.service';
 
 @Component({
   selector: 'csscs-dashboard',
@@ -15,17 +16,20 @@ export class DashboardComponent implements OnInit {
 
   // @ViewChild('switchControl', {static: false}) switchControl: MDCSwitch;
   $codeSnippets: Observable<Snippet[]>;
-  nightMode = true;
+  darkMode = true;
 
   color = 'primary';
   editMode: boolean;
 
   constructor(public authService: AuthService,
               private dataService: DataService,
+              private darkModeService: DarkModeService,
               private sanitizer: DomSanitizer) {
   }
 
   ngOnInit() {
+    this.darkModeService.getDarkmode().subscribe(value => this.darkMode = value);
+
     this.$codeSnippets = this.dataService.getSnippets();
   }
 
@@ -57,8 +61,7 @@ export class DashboardComponent implements OnInit {
     return AuthService.isLoggedIn;
   }
 
-  toggleNightMode() {
-    this.nightMode = !this.nightMode;
-    // this.switchControl.checked = this.nightMode;
+  toggleDarkMode() {
+    this.darkModeService.setDarkmode(!this.darkMode);
   }
 }

@@ -5,8 +5,6 @@ export interface Snippet {
   code: {
     html: string;
     css: string;
-    htmlSource: string;
-    cssSource: string;
     lang: string;
   };
 }

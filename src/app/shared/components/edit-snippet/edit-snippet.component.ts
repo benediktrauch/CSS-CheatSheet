@@ -94,9 +94,7 @@ export class EditSnippetComponent implements OnInit {
       desc: s.description,
       code: {
         html: s.htmlSource,
-        htmlSource: s.htmlSource,
         css: s.cssSource,
-        cssSource: s.cssSource,
         lang: ''
       }
     };

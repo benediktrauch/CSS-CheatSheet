@@ -3,7 +3,8 @@
   <!--<button mat-raised-button color="primary">Click me!</button>-->
 
   <div *ngIf="isLoggedIn()">
-    <a mat-stroked-button color="primary" (click)="toggleEditMode()" href="dashboard#newSnippet" *ngIf="!editMode ">Add new</a>
+    <a mat-stroked-button color="primary" (click)="toggleEditMode()" href="dashboard#newSnippet" *ngIf="!editMode ">Add
+      new</a>
   </div>
 
   <span id="newSnippet"></span>
@@ -18,18 +19,18 @@
     </div>
     <div class="code">
       <div class="block result">
-        <div class="themeSwitcher">
-          <mat-slide-toggle
-            id="nightMode-switch"
-            #switchControl
-            class="example-margin"
-            [color]="color"
-            [checked]="nightMode"
-            (change)="toggleNightMode()">
-            <label for="nightMode-switch">Dark Theme off/on</label>
-          </mat-slide-toggle>
-        </div>
-        <div [ngClass]="{'snippetWrapper':true, 'nightMode': nightMode, 'mdc-elevation--z8': !nightMode}">
+        <!--        <div class="themeSwitcher">
+                  <mat-slide-toggle
+                    id="nightMode-switch"
+                    #switchControl
+                    class="example-margin"
+                    [color]="color"
+                    [checked]="nightMode"
+                    (change)="toggleNightMode()">
+                    <label for="nightMode-switch">Dark Theme off/on</label>
+                  </mat-slide-toggle>
+                </div>-->
+        <div [ngClass]="{'snippetWrapper':true, 'nightMode': darkMode, 'mdc-elevation--z8': !darkMode}">
           <csscs-snippet [snippet]="snippet"></csscs-snippet>
         </div>
       </div>
@@ -60,5 +61,11 @@
       <button mat-button>SHARE</button>
     </mat-card-actions>
   </mat-card>-->
+
+  <div class="darkmodeFab">
+    <button mat-fab color="primary" (click)="toggleDarkMode()">
+      <mat-icon>{{darkMode ? 'brightness_high' : 'brightness_low'}}</mat-icon>
+    </button>
+  </div>
 
 </div>

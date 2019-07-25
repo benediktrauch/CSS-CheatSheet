@@ -1,4 +1,4 @@
-import { TestBed } from '@angular/core/testing';
+import {async, TestBed} from '@angular/core/testing';
 
 import { DataService } from './data.service';
 

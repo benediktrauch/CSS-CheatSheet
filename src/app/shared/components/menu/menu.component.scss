@@ -14,15 +14,24 @@ nav {
   align-items: center;
   justify-content: space-between;
 
-  .formFieldNoHint {
-    .mat-form-field-wrapper {
-      padding-bottom: 0;
-    }
-  }
+  //.formFieldNoHint {
+  //  .mat-form-field-wrapper {
+  //    padding-bottom: 0;
+  //  }
+  //}
 
   .links {
+    height: 100%;
+    display: flex;
+
+    svg {
+      height: 3em;
+      width: auto;
+    }
     a {
       color: #FFFFFF;
     }
   }
 }
+
+

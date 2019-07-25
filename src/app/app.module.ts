@@ -18,7 +18,7 @@ import { ProfileComponent } from './components/profile/profile.component';
 import {
   MatAutocompleteModule,
   MatButtonModule,
-  MatCardModule, MatChipsModule, MatFormFieldModule,
+  MatCardModule, MatChipsModule, MatDividerModule, MatFormFieldModule,
   MatIconModule,
   MatInputModule,
   MatMenuModule, MatProgressSpinnerModule,
@@ -64,6 +64,7 @@ import { EditSnippetComponent } from './shared/components/edit-snippet/edit-snip
     MatIconModule,
     MatAutocompleteModule,
     MatChipsModule,
+    MatDividerModule,
     MatProgressSpinnerModule,
     MatFormFieldModule
   ],

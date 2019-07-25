@@ -23,8 +23,6 @@ export class DataService {
   box-shadow: 0px 2px 2px 1px rgba(0, 0, 0, 0.2);
 }
 `,
-        htmlSource: `<div class="box">Box</div>`,
-        cssSource: `{"box-shadow": "0px 2px 2px 1px rgba(0, 0, 0, 0.2)"}`,
         lang: 'web'
       },
       desc: 'Here comes the text'
@@ -35,8 +33,6 @@ export class DataService {
       code: {
         html: `<div class="color">Colored Text</div>`,
         css: `.color{ color: red;}`,
-        htmlSource: `<div class="color">Color</div>`, // style="background: blue"
-        cssSource: `{"color": "red"}`,
         lang: 'web'
       },
       desc: 'Here comes the text'
