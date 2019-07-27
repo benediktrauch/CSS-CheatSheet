@@ -5,6 +5,14 @@ export interface Snippet {
   code: {
     html: string;
     css: string;
+    js?: string;
     lang: string;
   };
+  tags?: any[];
+  likes?: number;
+  createdBy?: string;
+  createdAt?: any;
+  updatedBy?: string;
+  updatedAt?: any;
+  deleted?: boolean;
 }

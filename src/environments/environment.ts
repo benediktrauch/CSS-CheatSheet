@@ -4,6 +4,7 @@
 
 export const environment = {
   production: false,
+  path: 'dev',
   firebase: {
     apiKey: 'AIzaSyBOtkPNX_eWy919hzkKk0q26T7SWvIGNrQ',
     authDomain: 'css-cheat-sheet.firebaseapp.com',

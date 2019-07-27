@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 import {AuthService} from '../../shared/services/auth.service';
 import {Snippet} from '../../shared/services/snippet';
 import {DomSanitizer} from '@angular/platform-browser';
@@ -14,12 +14,14 @@ import {DarkModeService} from '../../shared/services/dark-mode.service';
 })
 export class DashboardComponent implements OnInit {
 
-  // @ViewChild('switchControl', {static: false}) switchControl: MDCSwitch;
+  @ViewChild('newSnippet', {static: false}) newSnippet: ElementRef;
   $codeSnippets: Observable<Snippet[]>;
   darkMode = true;
 
   color = 'primary';
   editMode: boolean;
+
+  editSnippet: Snippet;
 
   constructor(public authService: AuthService,
               private dataService: DataService,
@@ -37,25 +39,26 @@ export class DashboardComponent implements OnInit {
     this.editMode = !this.editMode;
   }
 
-  addSnippet(event) {
+  addOrUpdateSnippet(event) {
     console.log(event);
-    this.dataService.addSnippet(event);
+    event.id ? (
+      this.dataService.updateSnippet(event)
+        .then(value => {
+          console.log(value);
+          this.cancelEditMode();
+        })
+    ) : (
+      this.dataService.addSnippet(event)
+        .then(value => {
+          console.log(value);
+          this.cancelEditMode();
+        })
+    );
 
-    setTimeout(() => {
-      this.toggleEditMode();
-    }, 2500);
+    // setTimeout(() => {
+    //   this.toggleEditMode();
+    // }, 2500);
   }
-
-  updateSnippet() {
-    this.dataService.updateSnippet();
-  }
-
-  // makeStyleTrusted(style) {
-  //   return this.sanitizer.bypassSecurityTrustStyle(style);
-  // }
-  // makeHtmlTrusted(html) {
-  //   return this.sanitizer.bypassSecurityTrustHtml(html);
-  // }
 
   isLoggedIn() {
     return AuthService.isLoggedIn;
@@ -63,5 +66,17 @@ export class DashboardComponent implements OnInit {
 
   toggleDarkMode() {
     this.darkModeService.setDarkmode(!this.darkMode);
+  }
+
+  snippetEdit(snippet) {
+    this.editSnippet = snippet;
+    this.editMode = true;
+    // window.scroll(0, 100);
+    this.newSnippet.nativeElement.scrollIntoView();
+  }
+
+  cancelEditMode() {
+    this.editSnippet = undefined;
+    this.toggleEditMode();
   }
 }

@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {MatChipInputEvent} from '@angular/material';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
@@ -15,6 +15,7 @@ export interface Tag {
 })
 export class EditSnippetComponent implements OnInit {
 
+  @Input() snippet: Snippet;
   @Output() cancelEdit = new EventEmitter<string>();
   @Output() submitEdit = new EventEmitter<Snippet>();
 
@@ -26,16 +27,24 @@ export class EditSnippetComponent implements OnInit {
   addOnBlur = true;
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
   tags: Tag[] = [
-    {name: 'Lemon'},
-    {name: 'Lime'},
-    {name: 'Apple'},
+    {name: 'css'},
+    {name: 'html'}
   ];
   uploading: boolean;
+
+  buttonText: string;
 
   constructor() {
   }
 
   ngOnInit() {
+    console.log(this.snippet);
+    if (this.snippet) {
+      this.buttonText = 'Update Snippet';
+      this.tags = this.snippet.tags;
+    } else {
+      this.buttonText = 'Add to Database';
+    }
     this.snippetForm = new FormGroup({
       title: new FormControl('', [
         Validators.required
@@ -48,8 +57,18 @@ export class EditSnippetComponent implements OnInit {
       ]),
       cssSource: new FormControl('', [
         Validators.required
-      ])
+      ]),
+      tags: new FormControl([])
     });
+
+    this.snippetForm
+      .patchValue({
+        title: this.snippet.title,
+        description: this.snippet.desc,
+        htmlSource: this.snippet.code.html,
+        cssSource: this.snippet.code.css,
+        tags: this.tags
+      });
   }
 
   add(event: MatChipInputEvent): void {
@@ -75,14 +94,6 @@ export class EditSnippetComponent implements OnInit {
     }
   }
 
-  get password() {
-    return this.snippetForm.get('password');
-  }
-
-  get email() {
-    return this.snippetForm.get('email');
-  }
-
   onSubmit() {
     this.uploading = true;
 
@@ -96,7 +107,8 @@ export class EditSnippetComponent implements OnInit {
         html: s.htmlSource,
         css: s.cssSource,
         lang: ''
-      }
+      },
+      tags: s.tags
     };
 
     this.submitEdit.emit(newSnippet);

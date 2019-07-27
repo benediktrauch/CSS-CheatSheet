@@ -48,6 +48,7 @@
             <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
           </mat-chip>
           <input placeholder="New tag..."
+                 formControlName="tags"
                  [matChipInputFor]="chipList"
                  [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
                  [matChipInputAddOnBlur]="addOnBlur"
@@ -60,7 +61,7 @@
       <button mat-stroked-button color="primary" *ngIf="!snippetForm.valid" (click)="checkForm()" type="button">
         Add to Database
       </button>
-      <button mat-raised-button color="primary" *ngIf="snippetForm.valid" type="submit">Add to Database</button>
+      <button mat-raised-button color="primary" *ngIf="snippetForm.valid" type="submit">{{buttonText}}</button>
       <button mat-stroked-button color="warn" type="button" (click)="closeEdit()">Cancel</button>
     </div>
   </div>

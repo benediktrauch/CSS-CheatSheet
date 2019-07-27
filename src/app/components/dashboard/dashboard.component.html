@@ -7,12 +7,12 @@
       new</a>
   </div>
 
-  <span id="newSnippet"></span>
+  <span id="newSnippet" #newSnippet></span>
   <div class="snippet mdc-elevation--z4" *ngIf="editMode">
-    <csscs-edit-snippet (cancelEdit)="toggleEditMode()" (submitEdit)="addSnippet($event)"></csscs-edit-snippet>
+    <csscs-edit-snippet (cancelEdit)="cancelEditMode()" (submitEdit)="addOrUpdateSnippet($event)" [snippet]="editSnippet"></csscs-edit-snippet>
   </div>
 
-  <div *ngFor="let snippet of $codeSnippets | async" class="snippet mdc-elevation--z4">
+  <div *ngFor="let snippet of $codeSnippets | async" class="snippet mdc-elevation--z4" (click)="snippetEdit(snippet)">
     <h1 class="header">{{snippet.title}}</h1>
     <div class="main">
       <p>{{snippet.desc}}</p>
@@ -38,7 +38,11 @@
         <csscs-source [snippet]="snippet"></csscs-source>
       </div>
     </div>
-    <div class="footer">Bla bla</div>
+    <div class="footer">
+<!--      <span class="snippetTags" *ngFor="let tag of snippet.tags">
+        {{tag}}
+      </span>-->
+    </div>
   </div>
 
   <!--
