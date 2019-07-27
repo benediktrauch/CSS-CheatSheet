@@ -111,6 +111,10 @@ export class EditSnippetComponent implements OnInit {
       tags: s.tags
     };
 
+    if (this.snippet.id) {
+      newSnippet.id = this.snippet.id;
+    }
+
     this.submitEdit.emit(newSnippet);
   }
 
