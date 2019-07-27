@@ -6,13 +6,7 @@
     <!--<button mat-button color="primary"  routerLinkActive="active">Home</button>-->
 
     <svg viewBox="0 0 100 100" class="csscslogo" routerLink="/">
-      <!--<defs>-->
-        <!--<filter id="f3" x="0" y="0" width="200%" height="200%">-->
-          <!--<feOffset result="offOut" in="SourceAlpha" dx="0" dy="5"></feOffset>-->
-          <!--<feGaussianBlur result="blurOut" in="offOut" stdDeviation="10"></feGaussianBlur>-->
-          <!--<feBlend in="SourceGraphic" in2="blurOut" mode="normal"></feBlend>-->
-        <!--</filter>-->
-      <!--</defs>-->
+
       <circle cx="50" cy="50" r="45" class="polyline circle" transform="rotate(90 50 50)" #circle></circle>
       <circle cx="50" cy="50" r="45" class="polyline circle" transform="translate(0,100) scale(1,-1) rotate(-90 50 50)"></circle>
       <polygon filter="url(#f3)" points="50,5 13,25 13,75 50,95 87,75 87,25" class="polyline background"></polygon>
@@ -22,8 +16,6 @@
 
       <polyline points="13,25 50,45 50,95" class="polyline inline" #inline></polyline>
       <polyline points="87,25 50,45 50,95" class="polyline inline"></polyline>
-      <!--<polyline points="13,25 50,45 50,95 13,75" class="polyline inline" #inline></polyline>-->
-      <!--<polyline points="85,25 50,45 50,95 85,75" class="polyline inline"></polyline>-->
     </svg>
 
     <!--<button class="mdc-button mdc-button&#45;&#45;dense" routerLink="/dashboard" routerLinkActive="active" >-->
