@@ -6,15 +6,19 @@
 }
 
 .snippet {
-  width: 100%;
+  max-width: 93%;
   background-color: calculateElevation(6);
   min-height: 5em;
 
-  margin: 1em;
   padding: 1em;
   border-radius: 12px;
+  margin: 1em 0;
 
   position: relative;
+
+  @media screen and (min-width: 768px) {
+    margin: 1em;
+  }
 
   .header {
     display: flex;
@@ -55,11 +59,14 @@
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
+      position: relative;
+      overflow: auto;
 
       .snippetWrapper {
         background-color: rgb(255, 255, 255);
         color: #000;
         min-height: 15em;
+        max-width: 100%;
 
         border-radius: $smallBorderRadius;
 

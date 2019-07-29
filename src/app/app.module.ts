@@ -33,6 +33,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { EditSnippetComponent } from './shared/components/edit-snippet/edit-snippet.component';
 import {NgPipesModule} from 'ngx-pipes';
 import { FilterPipe } from './shared/pipes/filter.pipe';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 @NgModule({
   declarations: [
@@ -71,7 +72,8 @@ import { FilterPipe } from './shared/pipes/filter.pipe';
     MatProgressSpinnerModule,
     MatFormFieldModule,
     NgPipesModule,
-    FormsModule
+    FormsModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   exports: [
     SnippetComponent
