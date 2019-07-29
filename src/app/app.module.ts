@@ -29,8 +29,10 @@ import { SnippetComponent } from './shared/components/snippet/snippet.component'
 import { SourceComponent } from './shared/components/source/source.component';
 import {PrismModule} from '@ngx-prism/core';
 import { MenuComponent } from './shared/components/menu/menu.component';
-import {ReactiveFormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { EditSnippetComponent } from './shared/components/edit-snippet/edit-snippet.component';
+import {NgPipesModule} from 'ngx-pipes';
+import { FilterPipe } from './shared/pipes/filter.pipe';
 
 @NgModule({
   declarations: [
@@ -44,7 +46,8 @@ import { EditSnippetComponent } from './shared/components/edit-snippet/edit-snip
     SnippetComponent,
     SourceComponent,
     MenuComponent,
-    EditSnippetComponent
+    EditSnippetComponent,
+    FilterPipe
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
@@ -66,7 +69,9 @@ import { EditSnippetComponent } from './shared/components/edit-snippet/edit-snip
     MatChipsModule,
     MatDividerModule,
     MatProgressSpinnerModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    NgPipesModule,
+    FormsModule
   ],
   exports: [
     SnippetComponent

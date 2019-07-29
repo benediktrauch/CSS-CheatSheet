@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {Snippet} from './snippet';
 import {Observable} from 'rxjs';
 import {AngularFirestore} from '@angular/fire/firestore';
-import {map, shareReplay} from 'rxjs/operators';
+import {filter, map, shareReplay} from 'rxjs/operators';
 import * as firebase from 'firebase';
 import {AuthService} from './auth.service';
 
@@ -24,9 +24,10 @@ export class DataService {
     console.log(firebase.firestore.FieldValue.serverTimestamp());
     this.snippet$ = this.firestore
       .collection('snippet')
-      .valueChanges().pipe(shareReplay(1)
+      .valueChanges()
+      .pipe(
+        shareReplay(1)
       ) as Observable<Snippet[]>;
-    // const snippet = firestore.doc('snippet');
   }
 
   addSnippet(snippet: Snippet) {
@@ -56,20 +57,34 @@ export class DataService {
   }
 
   updateSnippet(snippet: Snippet) {
-
-//     const docRef = this.firestore.collection('objects').doc('some-id');
-//
-// // Update the timestamp field with the value from the server
-//     const updateTimestamp = docRef.update({
-//       updatedAt: firebase.firestore.FieldValue.serverTimestamp()
-//     });
-
-
     snippet.updatedAt = firebase.firestore.FieldValue.serverTimestamp();
-    // snippet.updatedBy = this.authService.getUserId();
-
     return this.firestore.collection('snippet')
       .doc(snippet.id)
       .update(snippet);
+  }
+
+  deleteSnippet(snippet: Snippet) {
+    return this.firestore
+      .collection('deleted')
+      .add(snippet)
+      .then(() => {
+        return this.firestore.collection('snippet')
+          .doc(snippet.id)
+          .delete();
+      })
+      .catch(error => {
+        console.error('Error adding document: ', error);
+      });
+
+    // return this.firestore.collection('snippet')
+    //   .doc(snippet.id)
+    //   .update({deleted: true})
+    //   .then(() => console.log(`Document with ID: ${snippet.id} deleted!`)
+    //   );
+
+    //
+    // return this.firestore.collection('snippet')
+    //   .doc(snippet.id)
+    //   .delete();
   }
 }

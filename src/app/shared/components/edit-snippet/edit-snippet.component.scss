@@ -73,24 +73,24 @@
   }
 
   .editTitle, .main, .code, .footer {
-    transition: 0.5s;
+    @include transition;
     opacity: 1;
   }
 
   .uploadAnimation {
     display: none;
-    transition: 0.5s;
+    @include transition;
     opacity: 0;
   }
 
   &.uploading {
     .editTitle, .main, .code, .footer {
-      transition: 0.5s;
+      @include transition;
       opacity: 0;
     }
 
     .uploadAnimation {
-      transition: 0.5s;
+      @include transition;
       opacity: 1;
 
       @include flex-center;

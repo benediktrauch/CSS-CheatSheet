@@ -41,7 +41,7 @@ export class EditSnippetComponent implements OnInit {
     console.log(this.snippet);
     if (this.snippet) {
       this.buttonText = 'Update Snippet';
-      this.tags = this.snippet.tags;
+      // this.tags = this.snippet.tags;
     } else {
       this.buttonText = 'Add to Database';
     }
@@ -61,14 +61,16 @@ export class EditSnippetComponent implements OnInit {
       tags: new FormControl([])
     });
 
-    this.snippetForm
-      .patchValue({
-        title: this.snippet.title,
-        description: this.snippet.desc,
-        htmlSource: this.snippet.code.html,
-        cssSource: this.snippet.code.css,
-        tags: this.tags
-      });
+    if (this.snippet && this.snippet.title) {
+      this.snippetForm
+        .patchValue({
+          title: this.snippet.title,
+          description: this.snippet.desc,
+          htmlSource: this.snippet.code.html,
+          cssSource: this.snippet.code.css,
+          tags: this.tags
+        });
+    }
   }
 
   add(event: MatChipInputEvent): void {
@@ -99,6 +101,7 @@ export class EditSnippetComponent implements OnInit {
 
     const s = this.snippetForm.value;
     console.log(s);
+    console.log(this.tags);
 
     const newSnippet: Snippet = {
       title: s.title,
@@ -108,12 +111,13 @@ export class EditSnippetComponent implements OnInit {
         css: s.cssSource,
         lang: ''
       },
-      tags: s.tags
+      tags: this.tags
     };
 
-    if (this.snippet.id) {
+    if (this.snippet && this.snippet.id) {
       newSnippet.id = this.snippet.id;
     }
+    console.log(newSnippet);
 
     this.submitEdit.emit(newSnippet);
   }

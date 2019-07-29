@@ -2,34 +2,64 @@
 
   <!--<button mat-raised-button color="primary">Click me!</button>-->
 
-  <div *ngIf="isLoggedIn()">
-    <a mat-stroked-button color="primary" (click)="toggleEditMode()" href="dashboard#newSnippet" *ngIf="!editMode ">Add
-      new</a>
-  </div>
+  <ng-container *ngIf="isLoggedIn()">
+    <a mat-stroked-button color="primary" (click)="toggleEditMode()" href="dashboard#newSnippet" *ngIf="!editMode">
+      Add new</a>
+  </ng-container>
 
   <span id="newSnippet" #newSnippet></span>
-  <div class="snippet mdc-elevation--z4" *ngIf="editMode">
-    <csscs-edit-snippet (cancelEdit)="cancelEditMode()" (submitEdit)="addOrUpdateSnippet($event)" [snippet]="editSnippet"></csscs-edit-snippet>
+  <ng-container class="snippet mdc-elevation--z4" *ngIf="editMode">
+    <csscs-edit-snippet (cancelEdit)="cancelEditMode()" (submitEdit)="addOrUpdateSnippet($event)"
+                        [snippet]="editSnippet"></csscs-edit-snippet>
+  </ng-container>
+
+  <ng-container *ngIf="searchString
+  && searchString.length > 1
+  && (($codeSnippets | async) | csscsFilter : searchString).length < 1"
+       class="mdc-elevation--z4 snippet">
+    <h1>No snippets found for: {{searchString}}</h1>
+    <button mat-stroked-button color="primary" (click)="setSearchString('')">
+      <mat-icon>done</mat-icon>
+      <span>Okay, show all</span>
+    </button>
+  </ng-container>
+
+  <div class="loadingAnimation" *ngIf="!($codeSnippets | async)">
+    <mat-icon aria-hidden="false" aria-label="Download">cloud_download</mat-icon>
+    <mat-progress-spinner
+      class="spinner"
+      [color]="'primary'"
+      [diameter]="300"
+      [strokeWidth]="3"
+      [mode]="'indeterminate'">
+    </mat-progress-spinner>
   </div>
 
-  <div *ngFor="let snippet of $codeSnippets | async" class="snippet mdc-elevation--z4" (click)="snippetEdit(snippet)">
-    <h1 class="header">{{snippet.title}}</h1>
+  <div *ngFor="let snippet of ($codeSnippets | async) | csscsFilter : searchString; index as index; trackBy: identify"
+       [ngClass]="{'snippet': true, 'mdc-elevation--z4': true, 'deleteMode': selectedSnippet === index}">
+    <div class="header">
+      <h1>{{snippet.title}}</h1>
+      <div *ngIf="isLoggedIn()">
+        <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="snippetEdit(snippet)">
+            <mat-icon>edit</mat-icon>
+            <span>Edit</span>
+          </button>
+          <button mat-menu-item (click)="confirmDelete(index)">
+            <mat-icon>delete</mat-icon>
+            <span>Delete</span>
+          </button>
+        </mat-menu>
+      </div>
+    </div>
     <div class="main">
       <p>{{snippet.desc}}</p>
     </div>
     <div class="code">
       <div class="block result">
-        <!--        <div class="themeSwitcher">
-                  <mat-slide-toggle
-                    id="nightMode-switch"
-                    #switchControl
-                    class="example-margin"
-                    [color]="color"
-                    [checked]="nightMode"
-                    (change)="toggleNightMode()">
-                    <label for="nightMode-switch">Dark Theme off/on</label>
-                  </mat-slide-toggle>
-                </div>-->
         <div [ngClass]="{'snippetWrapper':true, 'nightMode': darkMode, 'mdc-elevation--z8': !darkMode}">
           <csscs-snippet [snippet]="snippet"></csscs-snippet>
         </div>
@@ -38,34 +68,39 @@
         <csscs-source [snippet]="snippet"></csscs-source>
       </div>
     </div>
-    <div class="footer">
-<!--      <span class="snippetTags" *ngFor="let tag of snippet.tags">
-        {{tag}}
-      </span>-->
+    <div class="footer" *ngIf="snippet.tags && snippet.tags[0] && snippet.tags[0].name">
+      <a class="snippetTags" *ngFor="let tag of snippet.tags" [routerLink]="['/']" [queryParams]="{search: tag.name}">
+        #{{tag.name}}
+      </a>
+    </div>
+    <div class="deleteConfirmation">
+      <ng-container class="confirmationWrapper" *ngIf="!deletingSnippet">
+        <span>Do you really want to delete this snippet?</span>
+
+        <div class="buttonBar">
+          <button mat-flat-button color="warn" type="button" (click)="snippetDelete(snippet)">
+            <mat-icon>delete</mat-icon>
+            <span>Yes, delete this snippet</span>
+          </button>
+
+          <button mat-stroked-button color="primary" type="button" (click)="cancelDeleteMode()">
+            <mat-icon>cancel</mat-icon>
+            <span>Cancel</span>
+          </button>
+        </div>
+      </ng-container>
+      <ng-container class="deleteAnimation" *ngIf="deletingSnippet">
+        <mat-icon aria-hidden="false" aria-label="delete">delete</mat-icon>
+        <mat-progress-spinner
+          class="spinner"
+          [color]="'primary'"
+          [diameter]="300"
+          [strokeWidth]="3"
+          [mode]="'indeterminate'">
+        </mat-progress-spinner>
+      </ng-container>
     </div>
   </div>
-
-  <!--
-  <mat-card class="example-card">
-    <mat-card-header>
-      <div mat-card-avatar class="example-header-image"></div>
-      <mat-card-title>Shiba Inu</mat-card-title>
-      <mat-card-subtitle>Dog Breed</mat-card-subtitle>
-    </mat-card-header>
-    <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
-    <mat-card-content>
-      <p>
-        The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
-        A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
-        bred for hunting.
-      </p>
-    </mat-card-content>
-    <mat-card-actions>
-      <button mat-button>LIKE</button>
-      <button mat-button>SHARE</button>
-    </mat-card-actions>
-  </mat-card>-->
-
   <div class="darkmodeFab">
     <button mat-fab color="primary" (click)="toggleDarkMode()">
       <mat-icon>{{darkMode ? 'brightness_high' : 'brightness_low'}}</mat-icon>

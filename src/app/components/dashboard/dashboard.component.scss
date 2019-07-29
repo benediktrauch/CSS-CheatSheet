@@ -14,10 +14,25 @@
   padding: 1em;
   border-radius: 12px;
 
+  position: relative;
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .main {
+    opacity: 1;
+    @include transition;
+  }
+
   .code {
     width: 100%;
     display: flex;
     flex-wrap: wrap;
+    opacity: 1;
+    @include transition;
 
     .block {
       width: 100%;
@@ -36,8 +51,6 @@
 
 
     .result {
-      //min-height: 15em;
-      //overflow: auto;
 
       display: flex;
       flex-direction: column;
@@ -47,16 +60,15 @@
         background-color: rgb(255, 255, 255);
         color: #000;
         min-height: 15em;
-        //width: 100%;
 
         border-radius: $smallBorderRadius;
 
         @include flex-center;
 
-        transition: 0.5s;
+        @include transition;
 
         &.nightMode {
-          transition: 0.5s;
+          @include transition;
           background-color: rgba(0, 0, 0, 0);
           color: #FFF;
         }
@@ -65,24 +77,129 @@
       csscs-snippet {
         margin: auto;
       }
-
-
-      .themeSwitcher {
-        //width: 100%;
-        //margin: 0 0 1em ;
-        //@include flex-center;
-
-        justify-self: flex-start;
-        margin: auto;
-      }
     }
 
     .source {
-      //min-height: 15em;
-      //overflow: auto;
+    }
+  }
+
+  .footer {
+    opacity: 1;
+    @include transition;
+
+    .snippetTags {
+      margin: 0.5em 1em 0.5em 0;
+      color: $CSSCheatSheet-primaryColor;
+      padding: 0.2em 0.6em;
+      border: 1px solid $CSSCheatSheet-primaryColor;
+      border-radius: $borderRadius;
+      background: none;
+      text-decoration: none;
+      box-shadow: none;
+      //@include transition;
+
+      &:hover {
+        background-color: $CSSCheatSheet-primaryColor;
+        color: #FFFFFF;
+        box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
+        //@include transition;
+      }
+    }
+  }
+
+
+  .deleteConfirmation {
+    display: none;
+    opacity: 0;
+    @include transition;
+  }
+
+  &.deleteMode {
+    .main {
+      opacity: 0;
+      @include transition;
     }
 
+    .code {
+      opacity: 0;
+      @include transition;
+    }
 
+    .footer {
+      opacity: 0;
+      @include transition;
+    }
+
+    .deleteConfirmation {
+      display: flex;
+      position: absolute;
+      bottom: 0;
+      height: 80%;
+      width: 100%;
+
+      opacity: 1;
+      @include transition;
+
+      .confirmationWrapper {
+        margin: auto;
+        width: 100%;
+
+        @include flex-center;
+
+        .buttonBar {
+          button {
+            margin: 1em;
+          }
+        }
+      }
+    }
+  }
+
+  .deleteAnimation {
+    @include transition;
+    opacity: 1;
+
+    @include flex-center;
+
+    position: absolute;
+    bottom: 0;
+    height: 80%;
+    width: 100%;
+
+    text-align: center;
+
+    .material-icons {
+      font-size: 10em;
+      width: 100%;
+      height: 100%;
+      margin: 3em;
+    }
+
+    .spinner {
+      position: absolute;
+    }
+  }
+}
+
+.loadingAnimation {
+  position: relative;
+  bottom: 0;
+  height: 80%;
+  width: 100%;
+
+  text-align: center;
+  @include flex-center;
+
+
+  .material-icons {
+    font-size: 10em;
+    width: 100%;
+    height: 100%;
+    margin: 1em;
+  }
+
+  .spinner {
+    position: absolute;
   }
 }
 

@@ -47,8 +47,9 @@
             {{tag.name}}
             <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
           </mat-chip>
+          <!--formControlName="tags"-->
+
           <input placeholder="New tag..."
-                 formControlName="tags"
                  [matChipInputFor]="chipList"
                  [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
                  [matChipInputAddOnBlur]="addOnBlur"

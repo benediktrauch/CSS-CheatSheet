@@ -4,6 +4,7 @@ import {Observable} from 'rxjs';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {map, startWith} from 'rxjs/operators';
 import {DarkModeService} from '../../services/dark-mode.service';
+import {SearchService} from '../../services/search.service';
 
 @Component({
   selector: 'csscs-menu',
@@ -24,8 +25,11 @@ export class MenuComponent implements OnInit, AfterViewInit {
   options: string[] = ['One', 'Two', 'Three'];
   filteredOptions: Observable<string[]>;
   darkMode: boolean;
+  searchString: string;
 
-  constructor(public authService: AuthService, private darkModeService: DarkModeService) {
+  constructor(public authService: AuthService,
+              private darkModeService: DarkModeService,
+              private searchService: SearchService) {
   }
 
   ngOnInit() {
@@ -39,6 +43,12 @@ export class MenuComponent implements OnInit, AfterViewInit {
     this.filteredOptions = this.myControl.valueChanges.pipe(
       startWith(''),
       map(value => this._filter(value))
+    );
+
+    this.searchService.getSearchString().subscribe(
+      value => {
+        this.searchString = value;
+      }
     );
   }
 
@@ -74,5 +84,9 @@ export class MenuComponent implements OnInit, AfterViewInit {
 
   toggleDarkMode() {
     this.darkModeService.setDarkmode(!this.darkMode);
+  }
+
+  search(event) {
+    this.searchService.setSearchString(this.searchString);
   }
 }

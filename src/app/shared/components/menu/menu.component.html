@@ -1,5 +1,5 @@
 <nav class="mdc-elevation--z18">
-  <div class="links">
+  <div class="left">
     <!--<button class="mdc-button mdc-button&#45;&#45;dense mdc-button-container-fill-color(#8800EE)" routerLink="/" routerLinkActive="active" >-->
     <!--<span class="mdc-button__label">Home</span>-->
     <!--</button>-->
@@ -25,7 +25,7 @@
 
   </div>
 
-  <div>
+  <div class="right">
     <!--    <form class="example-form">
           <mat-form-field class="example-full-width">
             <input type="text" placeholder="Pick one" aria-label="Number" matInput [formControl]="myControl"
@@ -40,13 +40,17 @@
 
     <mat-form-field appearance="outline" class="formFieldNoHint">
       <mat-label>Search</mat-label>
-      <input matInput placeholder="Search">
+      <input matInput placeholder="Search" [(ngModel)]="searchString" (input)="search($event)">
       <mat-icon matSuffix>search</mat-icon>
     </mat-form-field>
 
-
+<!--
     <button class="mdc-icon-button material-icons"
-            [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+            aria-label="Example icon-button with a menu">
+      <mat-icon>account_circle</mat-icon>
+    </button>-->
+
+    <button mat-icon-button class="mdc-icon-button material-icons" color="primary" [matMenuTriggerFor]="menu" aria-label="Example icon-button with a heart icon">
       <mat-icon>account_circle</mat-icon>
     </button>
     <mat-menu #menu="matMenu" xPosition="before">

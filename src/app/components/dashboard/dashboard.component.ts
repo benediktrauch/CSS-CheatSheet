@@ -5,6 +5,7 @@ import {DomSanitizer} from '@angular/platform-browser';
 import {DataService} from '../../shared/services/data.service';
 import {Observable} from 'rxjs';
 import {DarkModeService} from '../../shared/services/dark-mode.service';
+import {SearchService} from '../../shared/services/search.service';
 
 @Component({
   selector: 'csscs-dashboard',
@@ -18,15 +19,32 @@ export class DashboardComponent implements OnInit {
   $codeSnippets: Observable<Snippet[]>;
   darkMode = true;
 
+  searchString: string;
+
   color = 'primary';
   editMode: boolean;
+  deleteMode: boolean;
+  deletingSnippet: boolean;
+  selectedSnippet: number;
 
   editSnippet: Snippet;
 
   constructor(public authService: AuthService,
               private dataService: DataService,
               private darkModeService: DarkModeService,
-              private sanitizer: DomSanitizer) {
+              private sanitizer: DomSanitizer,
+              private searchService: SearchService) {
+
+    this.searchService.getSearchString().subscribe(
+      value => {
+        this.searchString = value;
+        // console.log(value);
+      }
+    );
+  }
+
+  identify(index, item) {
+    return item.id;
   }
 
   ngOnInit() {
@@ -71,12 +89,36 @@ export class DashboardComponent implements OnInit {
   snippetEdit(snippet) {
     this.editSnippet = snippet;
     this.editMode = true;
-    // window.scroll(0, 100);
-    this.newSnippet.nativeElement.scrollIntoView();
+    window.scroll(0, 100);
+    // this.newSnippet.nativeElement.scrollIntoView();
   }
 
   cancelEditMode() {
     this.editSnippet = undefined;
     this.toggleEditMode();
+  }
+
+  cancelDeleteMode() {
+    this.deleteMode = false;
+    this.selectedSnippet = undefined;
+    this.deletingSnippet = undefined;
+  }
+
+  snippetDelete(snippet: Snippet) {
+    this.deletingSnippet = true;
+    this.dataService.deleteSnippet(snippet)
+      .then(res => {
+        console.log(res);
+        this.cancelDeleteMode();
+      });
+  }
+
+  confirmDelete(index) {
+    this.deleteMode = true;
+    this.selectedSnippet = index;
+  }
+
+  setSearchString(searchString: string) {
+    this.searchService.setSearchString(searchString);
   }
 }

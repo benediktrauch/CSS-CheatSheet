@@ -18,7 +18,7 @@ export class SnippetComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.snippet);
+    // console.log(this.snippet);
 
     // console.log(JSON.parse(this.snippet.code.cssSource));
     // this.currentStyles = {

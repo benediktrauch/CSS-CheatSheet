@@ -10,18 +10,18 @@ $CSSCheatSheet-dark-lighter: #4f5b62;
 $CSSCheatSheet-dark-darker: #000a12;
 $CSSCheatSheet-primaryColor: mat-color($mat-green, 500);
 
-@import "~@material/animation/functions";
-@import "~@material/animation/variables";
-@import "~@material/floating-label/dist/mdc.floating-label.css";
-//@import "~@material/floating-label/mdc-floating-label";
-@import "~@material/form-field/dist/mdc.form-field.css";
-@import "~@material/button/dist/mdc.button.css";
-//@import "~@material/button/mdc-button";
-@import "~@material/textfield/dist/mdc.textfield.css";
-@import "~@material/icon-button/dist/mdc.icon-button.css";
-//@import "~@material/icon-button/mdc-icon-button";
-@import "~@material/elevation/dist/mdc.elevation.css";
-@import "~@material/switch/dist/mdc.switch.css";
+//@import "~@material/animation/functions";
+//@import "~@material/animation/variables";
+//@import "~@material/floating-label/dist/mdc.floating-label.css";
+////@import "~@material/floating-label/mdc-floating-label";
+//@import "~@material/form-field/dist/mdc.form-field.css";
+//@import "~@material/button/dist/mdc.button.css";
+////@import "~@material/button/mdc-button";
+//@import "~@material/textfield/dist/mdc.textfield.css";
+//@import "~@material/icon-button/dist/mdc.icon-button.css";
+////@import "~@material/icon-button/mdc-icon-button";
+//@import "~@material/elevation/dist/mdc.elevation.css";
+//@import "~@material/switch/dist/mdc.switch.css";
 
 //@import '~@material/textfield/mdc-text-field';
 
@@ -95,16 +95,15 @@ $smallBorderRadius: 8px;
 $shadowColor: rgba(0, 0, 0, 0.6);
 $boxShadow: 0px 2px 2px 1px $shadowColor;
 
+@mixin transition {
+  transition: 0.5s;
+}
 
-@mixin flex-center {
+@mixin  flex-center {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-}
-
-@mixin elevation() {
-
 }
 
 @function calculateElevation($level) {
@@ -166,13 +165,13 @@ body {
       &.outline {
         stroke-dasharray: 135;
         stroke-dashoffset: 135;
-        animation: dashAnimation 3s linear forwards;
+        animation: dashAnimation 3s 3s linear forwards;
       }
 
       &.inline {
         stroke-dasharray: 91;
         stroke-dashoffset: 91;
-        animation: dashAnimation 2.2s 0.8s linear forwards;
+        animation: dashAnimation 2.2s 3.8s linear forwards;
       }
 
       &.circle {
@@ -197,6 +196,7 @@ body {
       .polyline {
         stroke-dasharray: 0;
         stroke-dashoffset: 0;
+
         &.outline {
           //animation: rainbowAnimation 3s linear infinite;
         }
@@ -321,7 +321,11 @@ body {
   }
 
   .mat-tab-body-content {
+    position: relative;
     min-height: 15em;
+    ngx-prism {
+      position: absolute;
+    }
   }
 
   :not(pre) > code[class*=language-], pre[class*=language-] {
@@ -339,5 +343,14 @@ body {
 
   .formFieldNoHint .mat-form-field-wrapper {
     padding-bottom: 0;
+  }
+
+  .mat-stroked-button, .mat-flat-button {
+    .mat-button-wrapper {
+      .mat-icon {
+        margin-right: 8px;
+        margin-left: -8px;
+      }
+    }
   }
 }

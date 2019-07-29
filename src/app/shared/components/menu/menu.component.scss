@@ -10,8 +10,8 @@ nav {
     padding: 0.3em 2em;
   }
 
-  display: flex;
-  align-items: center;
+  @include flex-center;
+  flex-direction: row;
   justify-content: space-between;
 
   //.formFieldNoHint {
@@ -20,9 +20,11 @@ nav {
   //  }
   //}
 
-  .links {
+  .left {
     height: 100%;
-    display: flex;
+    @include flex-center;
+    flex-direction: row;
+
 
     svg {
       height: 3em;
@@ -31,6 +33,12 @@ nav {
     a {
       color: #FFFFFF;
     }
+  }
+
+  .right {
+    @include flex-center;
+    flex-direction: row;
+
   }
 }
 
