@@ -1,4 +1,4 @@
-<mat-tab-group>
+<!--<mat-tab-group>
   <mat-tab>
     <ng-template mat-tab-label>
       <img src="../../../../assets/img/HTML5_Logo.svg" alt="HTML5 Logo">
@@ -15,18 +15,33 @@
       <img src="../../../../assets/img/CSS3_Logo.svg" alt="CSS3 Logo">
       CSS
     </ng-template>
+
+    <pre>
+    <code class="language-css">{{snippet.code.css}}</code>
+    </pre>
+
+
+    <pre>
+    <code class="language-html">{{snippet.code.html}}</code>
+    </pre>
+  </mat-tab>
+</mat-tab-group>-->
+
+<div class="codeWrapper">
+  <div [ngClass]="{'codeBlock': true, 'active': openedCode === 'html'}">
+    <div (click)="toggleCode('html')">HTML</div>
+    <ngx-prism
+      [language]="'html'"
+      [code]="snippet.code.html"
+    ></ngx-prism>
+  </div>
+
+  <div [ngClass]="{'codeBlock': true, 'active': openedCode === 'css'}">
     <ngx-prism
       [language]="'css'"
       [code]="snippet.code.css"
-      [interpolation] = "interpolate"
+      [interpolation]="interpolate"
     ></ngx-prism>
-    <!--<pre>-->
-    <!--<code class="language-css">{{snippet.code.css}}</code>-->
-    <!--</pre>-->
-
-
-    <!--<pre>-->
-    <!--<code class="language-html">{{snippet.code.html}}</code>-->
-    <!--</pre>-->
-  </mat-tab>
-</mat-tab-group>
+    <div (click)="toggleCode('css')">CSS</div>
+  </div>
+</div>

@@ -6,18 +6,26 @@
 }
 
 .snippet {
+  width: 100%;
   max-width: 93%;
   background-color: calculateElevation(6);
   min-height: 5em;
 
   padding: 1em;
-  border-radius: 12px;
+  border-radius: $mediumBorderRadius;
   margin: 1em 0;
 
   position: relative;
 
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: column;
+
   @media screen and (min-width: 768px) {
     margin: 1em;
+    flex-direction: row;
+
   }
 
   .header {
@@ -31,27 +39,28 @@
     @include transition;
   }
 
+  .block {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 1em;
+    justify-content: space-between;
+  }
+
+  @media screen and (min-width: 768px) {
+    flex-wrap: nowrap;
+
+    .block {
+      width: 50%;
+    }
+  }
+
   .code {
     width: 100%;
     display: flex;
     flex-wrap: wrap;
     opacity: 1;
     @include transition;
-
-    .block {
-      width: 100%;
-      min-height: 15em;
-      margin: 0;
-      padding: 1em;
-    }
-
-    @media screen and (min-width: 768px) {
-      flex-wrap: nowrap;
-
-      .block {
-        width: 50%;
-      }
-    }
 
 
     .result {
@@ -86,8 +95,14 @@
       }
     }
 
-    .source {
-    }
+
+  }
+
+  .source {
+    height: 100%;
+    background-color: #131313;
+    border-radius: $mediumBorderRadius;
+    padding: 0;
   }
 
   .footer {

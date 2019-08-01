@@ -1,7 +1,38 @@
+@import "~src/styles";
+
 pre {
   code {
     max-width: 100%;
     position: absolute;
     overflow: auto;
   }
+}
+
+.codeWrapper {
+
+  .codeBlock {
+    border-radius: $mediumBorderRadius;
+    background-color: #ff76a7;
+    padding: 0.5em;
+    //position: absolute;
+    height: 90%;
+    width: 100%;
+    overflow: auto;
+
+
+    &:first-of-type {
+      background-color: blueviolet;
+      top: 0;
+
+    }
+    &:last-of-type {
+      background-color: indigo;
+      bottom: 0;
+    }
+
+    &.active {
+      z-index: 3;
+    }
+  }
+
 }

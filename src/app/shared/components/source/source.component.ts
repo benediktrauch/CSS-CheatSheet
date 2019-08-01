@@ -31,15 +31,20 @@ export class SourceComponent implements OnInit {
     language: 'language interpolated'
   };
 
+  openedCode: string;
+
   constructor() {
   }
 
   ngOnInit() {
+    this.openedCode = 'html';
   }
 
   makeJSON(code) {
     return JSON.parse(code);
   }
 
-
+  toggleCode(selected: string) {
+    this.openedCode = selected;
+  }
 }

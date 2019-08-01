@@ -3,12 +3,12 @@
 @import '~@angular/material/theming';
 @import '~prismjs/themes/prism-okaidia.css';
 
-$CSSCheatSheet-primary: mat-palette($mat-green, 500);
+$CSSCheatSheet-primary: mat-palette($mat-light-green, 400);
 $CSSCheatSheet-accent: mat-palette($mat-pink, A200, A100, A400);
 $CSSCheatSheet-dark-normal: mat-color($mat-blue-grey, 900);
 $CSSCheatSheet-dark-lighter: #4f5b62;
 $CSSCheatSheet-dark-darker: #000a12;
-$CSSCheatSheet-primaryColor: mat-color($mat-green, 500);
+$CSSCheatSheet-primaryColor: mat-color($mat-light-green, 400);
 
 //@import "~@material/animation/functions";
 //@import "~@material/animation/variables";
@@ -91,6 +91,7 @@ $CSSCheatSheet-theme: my-mat-dark-theme($CSSCheatSheet-primary, $CSSCheatSheet-a
 
 $borderRadius: 24px;
 $smallBorderRadius: 8px;
+$mediumBorderRadius: 12px;
 
 $shadowColor: rgba(0, 0, 0, 0.6);
 $boxShadow: 0px 2px 2px 1px $shadowColor;
@@ -358,6 +359,7 @@ body {
     }
   }
   .token.property, .token.tag, .token.constant, .token.symbol, .token.deleted{
+    background-color: #131313;
     color: #ff76a7;
   }
 }

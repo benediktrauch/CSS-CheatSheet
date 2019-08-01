@@ -1,0 +1,33 @@
+.outer {
+  display: flex;
+  background-color: #ff76a7;
+  margin: 1em;
+  padding: 1em;
+  border-radius: 20px;
+
+  .wrapper1 {
+    width: 50%;
+    background-color: indigo;
+    border-radius: 20px;
+
+    div {
+      height: 25px;
+      overflow: auto;
+      position: absolute;
+      width: 100%;
+    }
+
+    .wrapper11 {
+      background-color: blueviolet;
+      border-radius: 20px;
+      top: 0;
+    }
+
+    .wrapper12 {
+      background-color: blue;
+      border-radius: 20px;
+      bottom: 0;
+
+    }
+  }
+}

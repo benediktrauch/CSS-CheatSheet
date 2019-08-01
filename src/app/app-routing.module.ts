@@ -9,11 +9,13 @@ import {SignInComponent} from './components/sign-in/sign-in.component';
 import {SecureInnerPagesGuard} from './shared/guard/secure-inner-pages.guard';
 import {AuthGuard} from './shared/guard/auth.guard';
 import {ProfileComponent} from './components/profile/profile.component';
+import {TestComponent} from './shared/test/test.component';
 
 const routes: Routes = [
   // {path: '', redirectTo: '/dashboard', pathMatch: 'full'},
   {path: '', component: DashboardComponent},
   {path: 'dashboard', component: DashboardComponent},
+  {path: 'test', component: TestComponent},
   {path: 'sign-in', component: SignInComponent},
   {path: 'register-user', component: SignUpComponent},
   {path: 'forgot-password', component: ForgotPasswordComponent},
