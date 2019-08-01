@@ -23,7 +23,7 @@ export class DataService {
   querySnippets() {
     console.log(firebase.firestore.FieldValue.serverTimestamp());
     this.snippet$ = this.firestore
-      .collection('snippet')
+      .collection<Snippet[]>('snippet')
       .valueChanges()
       .pipe(
         shareReplay(1)
