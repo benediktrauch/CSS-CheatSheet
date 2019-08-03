@@ -89,8 +89,9 @@ $CSSCheatSheet-theme: my-mat-dark-theme($CSSCheatSheet-primary, $CSSCheatSheet-a
 /* You can add global styles to this file, and also import other style files */
 
 
-$borderRadius: 24px;
 $smallBorderRadius: 8px;
+$mediumBorderRadius: 12px;
+$borderRadius: 24px;
 
 $shadowColor: rgba(0, 0, 0, 0.6);
 $boxShadow: 0px 2px 2px 1px $shadowColor;
@@ -99,7 +100,7 @@ $boxShadow: 0px 2px 2px 1px $shadowColor;
   transition: 0.5s;
 }
 
-@mixin  flex-center {
+@mixin flex-center {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -261,8 +262,6 @@ body {
   }
 
   .mat-raised-button, .mat-stroked-button, .mat-button, .mat-flat-button {
-    -webkit-border-radius: $borderRadius;
-    -moz-border-radius: $borderRadius;
     border-radius: $borderRadius;
   }
 
@@ -274,6 +273,13 @@ body {
     flex-wrap: wrap;
   }
 
+  .container {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-column-gap: 1em;
+    grid-row-gap: 1em;
+  }
+
   .mat-tab-header {
     border: none;
   }
@@ -283,8 +289,8 @@ body {
     justify-content: space-evenly;
     //background-color: calculateElevation(2);
     background-color: rgba(0, 0, 0, 0.25);
-    border-top-left-radius: $smallBorderRadius;
-    border-top-right-radius: $smallBorderRadius;
+    border-top-left-radius: $mediumBorderRadius;
+    border-top-right-radius: $mediumBorderRadius;
     box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
 
   }
@@ -296,9 +302,10 @@ body {
     width: 50%;
 
     &:first-of-type {
-      border-top-left-radius: $smallBorderRadius;
+      border-top-left-radius: $mediumBorderRadius;
+
       &.mat-tab-label-active {
-        border-top-right-radius: $smallBorderRadius;
+        border-top-right-radius: $mediumBorderRadius;
         background-color: calculateElevation(12);
         box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
         opacity: 1;
@@ -306,9 +313,10 @@ body {
     }
 
     &:last-of-type {
-      border-top-right-radius: $smallBorderRadius;
+      border-top-right-radius: $mediumBorderRadius;
+
       &.mat-tab-label-active {
-        border-top-left-radius: $smallBorderRadius;
+        border-top-left-radius: $mediumBorderRadius;
         background-color: calculateElevation(12);
         box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
         opacity: 1;
@@ -332,36 +340,38 @@ body {
   }
 
   .mat-tab-body {
-    max-height: 15em;
-    min-height: 15em;
+    //max-height: 15em;
+    //min-height: 15em;
     //border-radius: $smallBorderRadius;
-    border-bottom-left-radius: $smallBorderRadius;
-    border-bottom-right-radius: $smallBorderRadius;
+    border-bottom-left-radius: $mediumBorderRadius;
+    border-bottom-right-radius: $mediumBorderRadius;
     //border: 1px solid calculateElevation(4);
-    background-color: rgba(0, 0, 0, .25);
+    //background-color: rgba(0, 0, 0, .25);
   }
 
   .mat-tab-body-wrapper {
-    //border-radius: $smallBorderRadius;
-    border-bottom-left-radius: $smallBorderRadius;
-    border-bottom-right-radius: $smallBorderRadius;
-    box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
-    background-color: rgba(0, 0, 0, .25);
+    //border-radius: $mediumBorderRadius;
+    border-bottom-left-radius: $mediumBorderRadius;
+    border-bottom-right-radius: $mediumBorderRadius;
+    //box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
+    //background-color: rgba(0, 0, 0, .25);
   }
 
   :not(pre) > code[class*="language-"], pre[class*="language-"] {
-    background-color: $CSSCheatSheet-dark-normal;
+    //background-color: $CSSCheatSheet-dark-normal;
   }
 
   .mat-tab-body-content {
     position: relative;
-    min-height: 15em;
+    //min-height: 15em;
+
     ngx-prism {
-      position: absolute;
+      display: grid;
     }
   }
 
   :not(pre) > code[class*=language-], pre[class*=language-] {
+    margin: 0;
     background-color: #00000000 !important;
   }
 
@@ -386,7 +396,24 @@ body {
       }
     }
   }
-  .token.property, .token.tag, .token.constant, .token.symbol, .token.deleted{
+
+  .token.property, .token.tag, .token.constant, .token.symbol, .token.deleted {
+    //background-color: #131313;
     color: #ff76a7;
+  }
+
+  .mat-tab-body-wrapper {
+    flex-grow: 1;
+  }
+
+  .mat-tab-body {
+    display: flex !important;
+    flex-direction: column;
+  }
+
+  .mat-tab-body-content {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
   }
 }

@@ -7,7 +7,7 @@
       Add new</a>
   </ng-container>
 
-  <span id="newSnippet" #newSnippet></span>
+  <ng-container id="newSnippet" #newSnippet></ng-container>
   <ng-container class="snippet mdc-elevation--z4" *ngIf="editMode">
     <csscs-edit-snippet (cancelEdit)="cancelEditMode()" (submitEdit)="addOrUpdateSnippet($event)"
                         [snippet]="editSnippet"></csscs-edit-snippet>
@@ -37,41 +37,43 @@
 
   <div *ngFor="let snippet of ($codeSnippets | async) | csscsFilter : searchString; index as index; trackBy: identify"
        [ngClass]="{'snippet': true, 'mdc-elevation--z4': true, 'deleteMode': selectedSnippet === index}">
-    <div class="header">
-      <h1>{{snippet.title}}</h1>
-      <div *ngIf="isLoggedIn()">
-        <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
-          <mat-icon>more_vert</mat-icon>
-        </button>
-        <mat-menu #menu="matMenu">
-          <button mat-menu-item (click)="snippetEdit(snippet)">
-            <mat-icon>edit</mat-icon>
-            <span>Edit</span>
+    <div class="block">
+      <div class="header">
+        <h1>{{snippet.title}}</h1>
+        <div *ngIf="isLoggedIn()">
+          <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+            <mat-icon>more_vert</mat-icon>
           </button>
-          <button mat-menu-item (click)="confirmDelete(index)">
-            <mat-icon>delete</mat-icon>
-            <span>Delete</span>
-          </button>
-        </mat-menu>
-      </div>
-    </div>
-    <div class="main">
-      <p>{{snippet.desc}}</p>
-    </div>
-    <div class="code">
-      <div class="block result">
-        <div [ngClass]="{'snippetWrapper':true, 'nightMode': darkMode, 'mdc-elevation--z8': !darkMode}">
-          <csscs-snippet [snippet]="snippet"></csscs-snippet>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="snippetEdit(snippet)">
+              <mat-icon>edit</mat-icon>
+              <span>Edit</span>
+            </button>
+            <button mat-menu-item (click)="confirmDelete(index)">
+              <mat-icon>delete</mat-icon>
+              <span>Delete</span>
+            </button>
+          </mat-menu>
         </div>
       </div>
-      <div class="block source">
-        <csscs-source [snippet]="snippet"></csscs-source>
+      <div class="main">
+        <p>{{snippet.desc}}</p>
+      </div>
+      <div class="code">
+        <div class="result">
+          <div [ngClass]="{'snippetWrapper':true, 'nightMode': darkMode, 'mdc-elevation--z8': !darkMode}">
+            <csscs-snippet [snippet]="snippet"></csscs-snippet>
+          </div>
+        </div>
+      </div>
+      <div class="footer" *ngIf="snippet.tags && snippet.tags[0] && snippet.tags[0].name">
+        <a class="snippetTags" *ngFor="let tag of snippet.tags" [routerLink]="['/']" [queryParams]="{search: tag.name}">
+          #{{tag.name}}
+        </a>
       </div>
     </div>
-    <div class="footer" *ngIf="snippet.tags && snippet.tags[0] && snippet.tags[0].name">
-      <a class="snippetTags" *ngFor="let tag of snippet.tags" [routerLink]="['/']" [queryParams]="{search: tag.name}">
-        #{{tag.name}}
-      </a>
+    <div class="block source">
+      <csscs-source [snippet]="snippet"></csscs-source>
     </div>
     <div class="deleteConfirmation">
       <ng-container class="confirmationWrapper" *ngIf="!deletingSnippet">
