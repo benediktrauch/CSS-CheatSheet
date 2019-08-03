@@ -281,14 +281,39 @@ body {
   .mat-tab-labels {
     display: flex;
     justify-content: space-evenly;
+    //background-color: calculateElevation(2);
+    background-color: rgba(0, 0, 0, 0.25);
+    border-top-left-radius: $smallBorderRadius;
+    border-top-right-radius: $smallBorderRadius;
+    box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
+
   }
 
   .mat-tab-label {
-    border-top-left-radius: 24px;
-    border-top-right-radius: 24px;
-    margin-top: 5px;
-    background-color: calculateElevation(6);
-    box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
+    //margin-top: 5px;
+    //box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
+    //background-color: calculateElevation(2);
+    width: 50%;
+
+    &:first-of-type {
+      border-top-left-radius: $smallBorderRadius;
+      &.mat-tab-label-active {
+        border-top-right-radius: $smallBorderRadius;
+        background-color: calculateElevation(12);
+        box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
+        opacity: 1;
+      }
+    }
+
+    &:last-of-type {
+      border-top-right-radius: $smallBorderRadius;
+      &.mat-tab-label-active {
+        border-top-left-radius: $smallBorderRadius;
+        background-color: calculateElevation(12);
+        box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
+        opacity: 1;
+      }
+    }
 
     .active {
       font-weight: bold;
@@ -309,13 +334,17 @@ body {
   .mat-tab-body {
     max-height: 15em;
     min-height: 15em;
-    border-radius: $smallBorderRadius;
-    border: 1px solid calculateElevation(4);
+    //border-radius: $smallBorderRadius;
+    border-bottom-left-radius: $smallBorderRadius;
+    border-bottom-right-radius: $smallBorderRadius;
+    //border: 1px solid calculateElevation(4);
     background-color: rgba(0, 0, 0, .25);
   }
 
   .mat-tab-body-wrapper {
-    border-radius: $smallBorderRadius;
+    //border-radius: $smallBorderRadius;
+    border-bottom-left-radius: $smallBorderRadius;
+    border-bottom-right-radius: $smallBorderRadius;
     box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
     background-color: rgba(0, 0, 0, .25);
   }
