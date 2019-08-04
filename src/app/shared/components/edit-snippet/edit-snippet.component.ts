@@ -41,7 +41,7 @@ export class EditSnippetComponent implements OnInit {
     console.log(this.snippet);
     if (this.snippet) {
       this.buttonText = 'Update Snippet';
-      // this.tags = this.snippet.tags;
+      this.tags = this.snippet.tags;
     } else {
       this.buttonText = 'Add to Database';
     }
@@ -68,7 +68,7 @@ export class EditSnippetComponent implements OnInit {
           description: this.snippet.desc,
           htmlSource: this.snippet.code.html,
           cssSource: this.snippet.code.css,
-          tags: this.tags
+          tags: this.snippet.tags
         });
     }
   }

@@ -37,7 +37,7 @@
 
   <div *ngFor="let snippet of ($codeSnippets | async) | csscsFilter : searchString; index as index; trackBy: identify"
        [ngClass]="{'snippet': true, 'mdc-elevation--z4': true, 'deleteMode': selectedSnippet === index}">
-    <div class="block">
+    <div class="block details">
       <div class="header">
         <h1>{{snippet.title}}</h1>
         <div *ngIf="isLoggedIn()">
@@ -76,7 +76,7 @@
       <csscs-source [snippet]="snippet"></csscs-source>
     </div>
     <div class="deleteConfirmation">
-      <ng-container class="confirmationWrapper" *ngIf="!deletingSnippet">
+      <div class="confirmationWrapper" *ngIf="!deletingSnippet">
         <span>Do you really want to delete this snippet?</span>
 
         <div class="buttonBar">
@@ -87,11 +87,11 @@
 
           <button mat-stroked-button color="primary" type="button" (click)="cancelDeleteMode()">
             <mat-icon>cancel</mat-icon>
-            <span>Cancel</span>
+            <span>No, keep this snippet</span>
           </button>
         </div>
-      </ng-container>
-      <ng-container class="deleteAnimation" *ngIf="deletingSnippet">
+      </div>
+      <div class="deleteAnimation" *ngIf="deletingSnippet">
         <mat-icon aria-hidden="false" aria-label="delete">delete</mat-icon>
         <mat-progress-spinner
           class="spinner"
@@ -100,7 +100,7 @@
           [strokeWidth]="3"
           [mode]="'indeterminate'">
         </mat-progress-spinner>
-      </ng-container>
+      </div>
     </div>
   </div>
   <div class="darkmodeFab">
@@ -108,5 +108,4 @@
       <mat-icon>{{darkMode ? 'brightness_high' : 'brightness_low'}}</mat-icon>
     </button>
   </div>
-
 </div>

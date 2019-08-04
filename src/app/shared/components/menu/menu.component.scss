@@ -39,6 +39,15 @@ nav {
     @include flex-center;
     flex-direction: row;
 
+    .searchInput {
+      display: none;
+    }
+
+    @media screen and (min-width: 425px) {
+      .searchInput {
+        display: initial;
+      }
+    }
   }
 }
 

@@ -6,11 +6,11 @@
 }
 
 .snippet {
+  position: relative;
   border-radius: $mediumBorderRadius;
   background-color: calculateElevation(6);
   min-height: 5em;
-  //width: 100%;
-padding: 1em;
+  padding: 1em;
   display: grid;
   grid-template-columns: 1fr;
   grid-column-gap: 1em;
@@ -20,103 +20,100 @@ padding: 1em;
     grid-template-columns: 1fr 1fr;
   }
 
-
   .block {
     width: 100%;
     height: 100%;
     margin: 0;
     justify-content: space-between;
     border-radius: $mediumBorderRadius;
-  }
 
-  .code {
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    opacity: 1;
-    @include transition;
-  }
+    &.details {
+      display: grid;
+      grid-template-rows: auto auto 1fr auto;
+      grid-template-columns: 1fr;
 
-  .header {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-  }
 
-  .main {
-    opacity: 1;
-    @include transition;
-  }
+      .header {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+      }
 
-  .code {
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    opacity: 1;
-    @include transition;
+      .main {
+        opacity: 1;
+        @include transition;
+      }
 
-    .result {
-
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      position: relative;
-      overflow: auto;
-
-      .snippetWrapper {
-        background-color: rgb(255, 255, 255);
-        color: #000;
-        min-height: 15em;
+      .code {
+        width: 100%;
         max-width: 100%;
+        overflow: auto;
+        opacity: 1;
+        @include transition;
 
-        border-radius: $mediumBorderRadius;
+        .result {
+          display: flex;
+          flex-direction: column;
+          justify-content: flex-end;
+          position: relative;
+          overflow: auto;
 
-        @include flex-center;
+          .snippetWrapper {
+            min-height: 15em;
+            max-width: 100%;
+            background-color: rgb(255, 255, 255);
+            color: #000;
+            border-radius: $mediumBorderRadius;
+            z-index: 1;
+
+            @include flex-center;
+
+            @include transition;
+
+            &.nightMode {
+              @include transition;
+              background-color: rgba(0, 0, 0, 0);
+              color: #FFF;
+            }
+          }
+
+          csscs-snippet {
+            margin: auto;
+          }
+        }
+      }
+      .footer {
+        opacity: 1;
+        padding: 1em 0;
+        display: inline-flex;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
 
         @include transition;
 
-        &.nightMode {
-          @include transition;
-          background-color: rgba(0, 0, 0, 0);
-          color: #FFF;
+        .snippetTags {
+          margin: 0.25em;
+          color: $CSSCheatSheet-primaryColor;
+          padding: 0.2em 0.6em;
+          border: 1px solid $CSSCheatSheet-primaryColor;
+          border-radius: $borderRadius;
+          background: none;
+          text-decoration: none;
+          box-shadow: none;
+
+          &:hover {
+            background-color: $CSSCheatSheet-primaryColor;
+            color: #FFFFFF;
+            box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
+          }
         }
       }
-
-      csscs-snippet {
-        margin: auto;
-      }
+    }
+    &.source {
+      border-radius: $mediumBorderRadius;
+      background-color: #131313;
     }
   }
-
-  .source {
-    border-radius: $mediumBorderRadius;
-    background-color: #131313;
-  }
-
-  .footer {
-    opacity: 1;
-    @include transition;
-
-    .snippetTags {
-      margin: 0.5em 1em 0.5em 0;
-      color: $CSSCheatSheet-primaryColor;
-      padding: 0.2em 0.6em;
-      border: 1px solid $CSSCheatSheet-primaryColor;
-      border-radius: $borderRadius;
-      background: none;
-      text-decoration: none;
-      box-shadow: none;
-      //@include transition;
-
-      &:hover {
-        background-color: $CSSCheatSheet-primaryColor;
-        color: #FFFFFF;
-        box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
-        //@include transition;
-      }
-    }
-  }
-
 
   .deleteConfirmation {
     display: none;
@@ -125,28 +122,22 @@ padding: 1em;
   }
 
   &.deleteMode {
-    .main {
-      opacity: 0;
-      @include transition;
-    }
-
-    .code {
-      opacity: 0;
-      @include transition;
-    }
-
-    .footer {
-      opacity: 0;
-      @include transition;
+    .block {
+      .main, .code, .footer, &.source {
+        opacity: 0;
+        @include transition;
+      }
     }
 
     .deleteConfirmation {
       display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+      align-items: center;
       position: absolute;
       bottom: 0;
       height: 80%;
       width: 100%;
-
       opacity: 1;
       @include transition;
 
@@ -191,13 +182,15 @@ padding: 1em;
   }
 }
 
+
 .loadingAnimation {
   position: relative;
   bottom: 0;
   height: 80%;
-  width: 100%;
-
+  width: 80%;
   text-align: center;
+  margin: auto;
+
   @include flex-center;
 
 
