@@ -4,7 +4,7 @@
 
   <div class="actionSection">
     <button [ngClass]="{'refreshButton': true}" mat-icon-button aria-label="refresh button">
-      <mat-icon [ngClass]="{'refreshButtonIcon': true}">autorenew</mat-icon>
+      <mat-icon [ngClass]="{'refreshButtonIcon': true}"><!--autorenew--></mat-icon>
     </button>
 
     <a mat-stroked-button color="primary"
@@ -14,13 +14,32 @@
       Add new
     </a>
 
-    <div class="filterWrapper">
+    <div class="right">
+      <div [ngClass]="{'filterWrapper': true, ' openFilter': openFilter}">
+        <div [ngClass]="{'filterOptions': true}">
+          <button [ngClass]="{'filterButton': true}"
+                  (click)="orderByString = 'title'"
+                  mat-icon-button
+                  aria-label="order by button">
+            <mat-icon [ngClass]="{'filterButtonIcon': true}">arrow_drop_up</mat-icon>
+          </button>
+          <mat-icon [ngClass]="{'filterIcon': true}">sort_by_alpha</mat-icon>
+          <button [ngClass]="{'filterButton': true}"
+                  (click)="orderByString = '-title'"
+                  mat-icon-button
+                  aria-label="filter button">
+            <mat-icon [ngClass]="{'filterButtonIcon': true}">arrow_drop_down</mat-icon>
+          </button>
+        </div>
 
-      <div class="filterOptions"></div>
-
-      <button [ngClass]="{'filterButton': true}" mat-icon-button aria-label="filter button">
-        <mat-icon [ngClass]="{'filterButtonIcon': true}">filter_list</mat-icon>
-      </button>
+        <button [ngClass]="{'filterButton': true}"
+                (click)="toggleFilter()"
+                mat-icon-button
+                color="primary"
+                aria-label="filter button">
+          <mat-icon [ngClass]="{'filterButtonIcon': true}">filter_list</mat-icon>
+        </button>
+      </div>
     </div>
   </div>
 
@@ -52,8 +71,11 @@
     </mat-progress-spinner>
   </div>
 
+  <!--isElementInViewport(test)-->
+
   <csscs-snippet
-    *ngFor="let snippet of ($codeSnippets | async) | csscsFilter : searchString; index as index; trackBy: identify"
+    *ngFor="let snippet of ($codeSnippets | async) | csscsFilter : searchString | orderBy: orderByString;
+    index as index; trackBy: identify"
     [snippet]="snippet"></csscs-snippet>
 
   <div class="darkmodeFab">

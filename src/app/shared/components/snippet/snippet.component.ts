@@ -1,4 +1,4 @@
-import {Component, ElementRef, Input, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
+import {Component, ElementRef, HostListener, Input, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 import {Snippet} from '../../services/snippet';
 import {DomSanitizer} from '@angular/platform-browser';
 import {AuthService} from '../../services/auth.service';
@@ -31,6 +31,7 @@ export class SnippetComponent implements OnInit {
 
   editSnippet: Snippet;
   snippetLiked: boolean;
+  // el: any;
 
   constructor(public authService: AuthService,
               private dataService: DataService,
@@ -85,4 +86,20 @@ export class SnippetComponent implements OnInit {
     snippet.liked = !snippet.liked;
     this.dataService.saveSnippetLike(snippet);
   }
+
+  // isElementInViewport(el) {
+  //
+  //   this.el = el;
+  //   const rect = el.getBoundingClientRect();
+  //
+  //   return rect.bottom > 0 &&
+  //     rect.right > 0 &&
+  //     rect.left < (window.innerWidth || document.documentElement.clientWidth) &&
+  //     rect.top < (window.innerHeight || document.documentElement.clientHeight);
+  // }
+  //
+  // @HostListener('window:scroll', ['$event']) // for window scroll events
+  // onScroll($event) {
+  //   this.isElementInViewport(this.el);
+  // }
 }

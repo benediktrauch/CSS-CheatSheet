@@ -20,6 +20,7 @@ export class DashboardComponent implements OnInit {
   darkMode = true;
 
   searchString: string;
+  orderByString: string;
 
   color = 'primary';
   editMode: boolean;
@@ -29,6 +30,7 @@ export class DashboardComponent implements OnInit {
 
   editSnippet: Snippet;
   snippetLiked: boolean;
+  openFilter: boolean;
 
   constructor(public authService: AuthService,
               private dataService: DataService,
@@ -53,6 +55,7 @@ export class DashboardComponent implements OnInit {
 
     this.$codeSnippets = this.dataService.getUserLikes();
     this.$codeSnippets.subscribe(val => console.log(val));
+    this.orderByString = '';
   }
 
   toggleEditMode() {
@@ -88,50 +91,17 @@ export class DashboardComponent implements OnInit {
     this.darkModeService.setDarkmode(!this.darkMode);
   }
 
-  snippetEdit(snippet) {
-    this.editSnippet = snippet;
-    this.editMode = true;
-    window.scroll(0, 100);
-    // this.newSnippet.nativeElement.scrollIntoView();
-  }
-
   cancelEditMode() {
     this.editSnippet = undefined;
     this.toggleEditMode();
-  }
-
-  cancelDeleteMode() {
-    this.deleteMode = false;
-    this.selectedSnippet = undefined;
-    this.deletingSnippet = undefined;
-  }
-
-  snippetDelete(snippet: Snippet) {
-    this.deletingSnippet = true;
-    this.dataService.deleteSnippet(snippet)
-      .then(res => {
-        console.log(res);
-        this.cancelDeleteMode();
-      });
-  }
-
-  confirmDelete(index) {
-    this.deleteMode = true;
-    this.selectedSnippet = index;
   }
 
   setSearchString(searchString: string) {
     this.searchService.setSearchString(searchString);
   }
 
-  toggleSnippetLike(snippet: Snippet) {
-    this.snippetLiked = !this.snippetLiked;
-
-    this.dataService.saveSnippetLike(snippet);
-  }
-
-  isSnippedLiked() {
-    return this.snippetLiked;
+  toggleFilter() {
+    this.openFilter = !this.openFilter;
   }
 
   scrollToElement($element): void {

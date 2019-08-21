@@ -9,16 +9,46 @@
   display: grid;
   grid-template-columns: 1fr auto 1fr;
 
-  .filterWrapper {
+  .right {
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: flex-end;
 
-    .filterButton {
+    .filterWrapper {
+      border-radius: $borderRadius;
+      display: flex;
+      background: rgba(76, 175, 80, 0.2);
+      clip-path: circle(19% at 86% 50%);
+      transition: 0.25s;
+
+      .filterOptions {
+        display: flex;
+        align-items: center;
+        transition: 0.5s;
+        clip-path: circle(0% at 100% 50%);
+        background: rgba(76, 175, 80, 0);
+        border-radius: $borderRadius;
+
+        .filterIcon {
+          opacity: 0.7;
+        }
+      }
+
+      &.openFilter {
+        clip-path: circle(200% at 86% 51%);
+
+        .filterOptions {
+          transition: 0.5s;
+          clip-path: circle(200% at 100% 50%);
+          background: rgba(76, 175, 80, 0.2);
+        }
+      }
     }
   }
 }
+
+
 
 //.snippet {
 //  position: relative;
@@ -292,3 +322,17 @@
 //    stroke-dashoffset: 20;
 //  }
 //}
+
+//csscs-snippet {
+//  clip-path: inset(0 0 0 0);
+//  animation: snippetAnimation .5s ease-in-out ;
+//}
+
+@keyframes snippetAnimation {
+  from {
+    clip-path: inset(0 0 100% 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
