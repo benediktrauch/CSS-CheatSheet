@@ -1,0 +1,65 @@
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="50"
+  height="50"
+  viewBox="0 0 50 50"
+  id="svg8">
+  <g
+    transform="translate(0,-283.77082)">
+    <path
+      style="fill:none;
+      stroke:#FFFFFF;
+      stroke-width:
+      1.5px;
+      stroke-linecap:round;
+      stroke-linejoin:miter;
+      stroke-opacity:1"
+      class="sparkleLine"
+      d="m 24.964484,286.0898 v 24.93254"
+      id="sparkle1"/>
+    <path
+      style="fill:none;
+      stroke:#FFFFFF;
+      stroke-width:
+      1.5px;
+      stroke-linecap:round;
+      stroke-linejoin:miter;
+      stroke-opacity:1"
+      class="sparkleLine"
+      d="M 24.964484,311.02234 1.2522294,303.31777"
+      id="sparkle2"/>
+    <path
+      style="fill:none;
+      stroke:#FFFFFF;
+      stroke-width:
+      1.5px;
+      stroke-linecap:round;
+      stroke-linejoin:miter;
+      stroke-opacity:1"
+      class="sparkleLine"
+      d="m 48.676741,303.31777 -23.712257,7.70457"
+      id="sparkle3"/>
+    <path
+      style="fill:none;
+      stroke:#FFFFFF;
+      stroke-width:
+      1.5px;
+      stroke-linecap:round;
+      stroke-linejoin:miter;
+      stroke-opacity:1"
+      class="sparkleLine"
+      d="M 10.309505,331.19319 24.964484,311.02234"
+      id="sparkle4"/>
+    <path
+      style="fill:none;
+      stroke:#FFFFFF;
+      stroke-width:
+      1.5px;
+      stroke-linecap:round;
+      stroke-linejoin:miter;
+      stroke-opacity:1"
+      class="sparkleLine"
+      d="M 39.619464,331.19319 24.964484,311.02234"
+      id="sparkle5"/>
+  </g>
+</svg>

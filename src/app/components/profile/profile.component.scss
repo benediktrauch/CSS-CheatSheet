@@ -1,0 +1,43 @@
+@import "~src/styles";
+
+.userProfileWrapper {
+  margin: 1em;
+  border-radius: $mediumBorderRadius;
+  background-color: calculateElevation(6);
+  padding: 1em;
+
+  .media {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-column-gap: 1em;
+
+    .img-thumbnail {
+      width: 3em;
+      height: 3em;
+    }
+
+    .rounded-circle {
+      border-radius: 1em;
+    }
+
+    .media-body {
+      display: flex;
+      align-items: center;
+      h1 {
+        margin: 0;
+        font-weight: lighter;
+      }
+    }
+  }
+}
+
+.likedSnippetsWrapper {
+  margin: 1em;
+  border-radius: $mediumBorderRadius;
+  //background-color: calculateElevation(6);
+  //padding: 1em;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-column-gap: 1em;
+  grid-row-gap: 1em;
+}

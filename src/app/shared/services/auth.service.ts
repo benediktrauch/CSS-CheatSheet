@@ -4,12 +4,17 @@ import {AngularFireAuth} from '@angular/fire/auth';
 import {AngularFirestore, AngularFirestoreDocument} from '@angular/fire/firestore';
 import {Router} from '@angular/router';
 import {User} from './user';
+import {DataService} from './data.service';
+import {BehaviorSubject} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   userData: any; // Save logged in user data
+
+  private dataSource = new BehaviorSubject({});
+  user = this.dataSource.asObservable();
 
   constructor(
     public afs: AngularFirestore,   // Inject Firestore service
@@ -22,13 +27,27 @@ export class AuthService {
     this.afAuth.authState.subscribe(user => {
       if (user) {
         this.userData = user;
+        // console.log(this.userData);
         localStorage.setItem('user', JSON.stringify(this.userData));
         JSON.parse(localStorage.getItem('user'));
+        this.updatedUser(user);
       } else {
         localStorage.setItem('user', null);
         JSON.parse(localStorage.getItem('user'));
       }
     });
+  }
+
+  updatedUser(user: User) {
+    if (!this.dataSource) {
+      this.dataSource = new BehaviorSubject<User>(user);
+    } else {
+      this.dataSource.next(user);
+    }
+  }
+
+  getUser() {
+    return this.user;
   }
 
   static get isLoggedIn(): boolean {
@@ -38,7 +57,11 @@ export class AuthService {
   }
 
   getUserId(): string {
-    return this.userData ? this.userData.uid : undefined;
+    const user = JSON.parse(localStorage.getItem('user'));
+    // console.log(user);
+
+    return user !== null ? user.uid : undefined;
+    // return this.userData ? this.userData.uid : undefined;
   }
 
 // Sign in with email/password

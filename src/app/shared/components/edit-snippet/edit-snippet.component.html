@@ -27,14 +27,22 @@
     <div class="block">
       <mat-form-field appearance="outline">
         <mat-label>HTML</mat-label>
-        <textarea matInput placeholder="HTML" formControlName="htmlSource"></textarea>
+        <textarea matInput placeholder="HTML" formControlName="htmlSource" (blur)="updatePreview()"></textarea>
       </mat-form-field>
     </div>
     <div class="block">
       <mat-form-field appearance="outline">
         <mat-label>CSS</mat-label>
-        <textarea matInput placeholder="CSS" formControlName="cssSource"></textarea>
+        <textarea matInput placeholder="CSS" formControlName="cssSource" (blur)="updatePreview()"></textarea>
       </mat-form-field>
+    </div>
+  </div>
+  <div class="block" *ngIf="snippetForm.valid">
+    <h2>Preview</h2>
+    <div class="result">
+      <div [ngClass]="{'snippetWrapper':true, 'nightMode': darkMode, 'mdc-elevation--z8': !darkMode}">
+        <csscs-result [snippet]="snippetPreview"></csscs-result>
+      </div>
     </div>
   </div>
   <div class="footer">

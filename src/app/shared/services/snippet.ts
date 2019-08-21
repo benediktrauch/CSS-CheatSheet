@@ -9,7 +9,7 @@ export interface Snippet {
     lang: string;
   };
   tags?: any[];
-  likes?: number;
+  liked?: boolean;
   createdBy?: string;
   createdAt?: any;
   updatedBy?: string;

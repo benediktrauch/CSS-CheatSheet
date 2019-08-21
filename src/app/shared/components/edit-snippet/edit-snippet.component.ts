@@ -3,6 +3,8 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {MatChipInputEvent} from '@angular/material';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import {Snippet} from '../../services/snippet';
+import {DataService} from '../../services/data.service';
+import {DarkModeService} from '../../services/dark-mode.service';
 
 export interface Tag {
   name: string;
@@ -19,6 +21,8 @@ export class EditSnippetComponent implements OnInit {
   @Output() cancelEdit = new EventEmitter<string>();
   @Output() submitEdit = new EventEmitter<Snippet>();
 
+  darkMode = true;
+
   snippetForm: FormGroup;
 
   visible = true;
@@ -33,11 +37,13 @@ export class EditSnippetComponent implements OnInit {
   uploading: boolean;
 
   buttonText: string;
+  snippetPreview: Snippet;
 
-  constructor() {
+  constructor(private darkModeService: DarkModeService) {
   }
 
   ngOnInit() {
+    this.darkModeService.getDarkmode().subscribe(value => this.darkMode = value);
     console.log(this.snippet);
     if (this.snippet) {
       this.buttonText = 'Update Snippet';
@@ -70,6 +76,7 @@ export class EditSnippetComponent implements OnInit {
           cssSource: this.snippet.code.css,
           tags: this.snippet.tags
         });
+      this.snippetPreview = this.snippet;
     }
   }
 
@@ -129,5 +136,20 @@ export class EditSnippetComponent implements OnInit {
 
   closeEdit() {
     this.cancelEdit.emit();
+  }
+
+  updatePreview() {
+    const s = this.snippetForm.value;
+    this.snippetPreview = {
+      title: s.title,
+      desc: s.description,
+      code: {
+        html: s.htmlSource,
+        css: s.cssSource,
+        lang: ''
+      },
+      tags: this.tags
+    };
+
   }
 }

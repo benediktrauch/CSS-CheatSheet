@@ -53,13 +53,13 @@ export class MenuComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    console.log('ngAfterViewInit');
-    console.log(this.outline.nativeElement);
-    console.log(this.outline.nativeElement.getTotalLength());
-    console.log(this.inline.nativeElement);
-    console.log(this.inline.nativeElement.getTotalLength());
-    console.log(this.circle.nativeElement);
-    console.log(this.circle.nativeElement.getTotalLength());
+    // console.log('ngAfterViewInit');
+    // console.log(this.outline.nativeElement);
+    // console.log(this.outline.nativeElement.getTotalLength());
+    // console.log(this.inline.nativeElement);
+    // console.log(this.inline.nativeElement.getTotalLength());
+    // console.log(this.circle.nativeElement);
+    // console.log(this.circle.nativeElement.getTotalLength());
 
     this.outlineStroke = this.outline.nativeElement.getTotalLength();
     this.circleStroke = this.circle.nativeElement.getTotalLength();

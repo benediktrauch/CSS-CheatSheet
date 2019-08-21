@@ -170,13 +170,13 @@ body {
       &.outline {
         stroke-dasharray: 135;
         stroke-dashoffset: 135;
-        animation: dashAnimation 3s 3s linear forwards;
+        animation: dashIconAnimation 3s 3s linear forwards;
       }
 
       &.inline {
         stroke-dasharray: 91;
         stroke-dashoffset: 91;
-        animation: dashAnimation 2.2s 3.8s linear forwards;
+        animation: dashIconAnimation 2.2s 3.8s linear forwards;
       }
 
       &.circle {
@@ -184,10 +184,6 @@ body {
         stroke-dashoffset: 283;
         stroke: $CSSCheatSheet-dark-lighter;
         stroke-opacity: 1;
-        //fill: $CSSCheatSheet-dark-normal;
-        //fill-opacity: 0;
-        //animation: dashAnimation 1.5s 3s linear forwards;
-        //animation: dashAnimationCircle 1.5s 3s linear forwards;
       }
 
       &.background {
@@ -202,16 +198,7 @@ body {
         stroke-dasharray: 0;
         stroke-dashoffset: 0;
 
-        &.outline {
-          //animation: rainbowAnimation 3s linear infinite;
-        }
-
-        &.inline {
-          //animation: rainbowAnimation 3s linear infinite;
-        }
-
         &.circle {
-          //animation: rainbowAnimation 3s linear infinite;
           stroke: $CSSCheatSheet-dark-lighter;
           stroke-opacity: 1;
           animation: pulseAnimation 2s ease-in-out infinite;
@@ -219,13 +206,13 @@ body {
       }
     }
 
-    @keyframes dashAnimation {
+    @keyframes dashIconAnimation {
       to {
         stroke-dashoffset: 0;
         stroke: $CSSCheatSheet-primaryColor;
       }
     }
-    @keyframes dashAnimationCircle {
+    @keyframes dashIconAnimationCircle {
       to {
         stroke-dashoffset: 0;
         fill-opacity: 1;
@@ -234,7 +221,6 @@ body {
 
     @keyframes pulseAnimation {
       30% {
-        //stroke: $CSSCheatSheet-dark-darker;
         stroke-opacity: 0;
       }
     }
@@ -381,6 +367,9 @@ body {
   }
 
   .mat-stroked-button, .mat-flat-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     .mat-button-wrapper {
       .mat-icon {
         margin-right: 8px;

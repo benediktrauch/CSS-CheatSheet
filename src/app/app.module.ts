@@ -34,6 +34,7 @@ import { EditSnippetComponent } from './shared/components/edit-snippet/edit-snip
 import {NgPipesModule} from 'ngx-pipes';
 import { FilterPipe } from './shared/pipes/filter.pipe';
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { ResultComponent } from './shared/components/result/result.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { ServiceWorkerModule } from '@angular/service-worker';
     SourceComponent,
     MenuComponent,
     EditSnippetComponent,
-    FilterPipe
+    FilterPipe,
+    ResultComponent
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),

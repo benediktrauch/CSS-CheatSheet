@@ -1,2 +1,109 @@
-<div [innerHTML]="getCSS(snippet.code.css)" style="position: absolute; display: none;"></div>
-<div [innerHTML]="snippet.code.html"></div>
+<div [ngClass]="{'snippet': true, 'mdc-elevation--z4': true, 'deleteMode': deleteMode}">
+  <div class="block details">
+    <div class="header">
+      <h1>{{snippet.title}}</h1>
+      <div *ngIf="isLoggedIn()" class="snippetActions">
+        <div class="snippetLikeButton">
+          <div [ngClass]="{'sparkleAnimation': true, 'liked': snippet.liked}">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="2.2em"
+              height="2.2em"
+              viewBox="0 0 50 50"
+              id="svg8">
+              <g
+                transform="translate(0,-283.77082)">
+                <path
+                  style="fill:none;stroke:#FFFFFF;stroke-width:1.5px;stroke-linecap:round;stroke-linejoin:miter;stroke-opacity:1"
+                  class="sparkleLine"
+                  d="m 24.964484,286.0898 v 24.93254"
+                  id="sparkle1"/>
+                <path
+                  style="fill:none;stroke:#FFFFFF;stroke-width:1.5px;stroke-linecap:round;stroke-linejoin:miter;stroke-opacity:1"
+                  class="sparkleLine"
+                  d="M 1.2522294,303.31777 24.964484,311.02234"
+                  id="sparkle2"/>
+                <path
+                  style="fill:none;stroke:#FFFFFF;stroke-width:1.5px;stroke-linecap:round;stroke-linejoin:miter;stroke-opacity:1"
+                  class="sparkleLine"
+                  d="m 48.676741,303.31777 -23.712257,7.70457"
+                  id="sparkle3"/>
+                <path
+                  style="fill:none;stroke:#FFFFFF;stroke-width:1.5px;stroke-linecap:round;stroke-linejoin:miter;stroke-opacity:1"
+                  class="sparkleLine"
+                  d="M 10.309505,331.19319 24.964484,311.02234"
+                  id="sparkle4"/>
+                <path
+                  style="fill:none;stroke:#FFFFFF;stroke-width:1.5px;stroke-linecap:round;stroke-linejoin:miter;stroke-opacity:1"
+                  class="sparkleLine"
+                  d="M 39.619464,331.19319 24.964484,311.02234"
+                  id="sparkle5"/>
+              </g>
+            </svg>
+          </div>
+          <button mat-icon-button aria-label="Like snippet button" (click)="toggleSnippetLike(snippet)">
+            <mat-icon [ngClass]="{'liked': snippet.liked}">{{ snippet.liked ? 'star' : 'star_border'}}</mat-icon>
+          </button>
+        </div>
+        <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="snippetEdit(snippet)">
+            <mat-icon>edit</mat-icon>
+            <span>Edit</span>
+          </button>
+          <button mat-menu-item (click)="confirmDelete(index)">
+            <mat-icon>delete</mat-icon>
+            <span>Delete</span>
+          </button>
+        </mat-menu>
+      </div>
+    </div>
+    <div class="main">
+      <p>{{snippet.desc}}</p>
+    </div>
+    <div class="code">
+      <div class="result">
+        <div [ngClass]="{'snippetWrapper':true, 'nightMode': darkMode, 'mdc-elevation--z8': !darkMode}">
+          <csscs-result [snippet]="snippet"></csscs-result>
+        </div>
+      </div>
+    </div>
+    <div class="footer" *ngIf="snippet.tags && snippet.tags[0] && snippet.tags[0].name">
+      <a class="snippetTags" *ngFor="let tag of snippet.tags" [routerLink]="['/']" [queryParams]="{search: tag.name}">
+        #{{tag.name}}
+      </a>
+    </div>
+  </div>
+  <div class="block source">
+    <csscs-source [snippet]="snippet"></csscs-source>
+  </div>
+  <div class="deleteConfirmation">
+    <div class="confirmationWrapper" *ngIf="!deletingSnippet">
+      <span>Do you really want to delete this snippet?</span>
+
+      <div class="buttonBar">
+        <button mat-flat-button color="warn" type="button" (click)="snippetDelete(snippet)">
+          <mat-icon>delete</mat-icon>
+          <span>Yes, delete this snippet</span>
+        </button>
+
+        <button mat-stroked-button color="primary" type="button" (click)="cancelDeleteMode()">
+          <mat-icon>cancel</mat-icon>
+          <span>No, keep this snippet</span>
+        </button>
+      </div>
+    </div>
+    <div class="deleteAnimation" *ngIf="deletingSnippet">
+      <mat-icon aria-hidden="false" aria-label="delete">delete</mat-icon>
+      <mat-progress-spinner
+        class="spinner"
+        [color]="'primary'"
+        [diameter]="300"
+        [strokeWidth]="3"
+        [mode]="'indeterminate'">
+      </mat-progress-spinner>
+    </div>
+  </div>
+</div>

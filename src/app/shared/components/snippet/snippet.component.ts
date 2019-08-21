@@ -1,6 +1,11 @@
-import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, ElementRef, Input, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 import {Snippet} from '../../services/snippet';
 import {DomSanitizer} from '@angular/platform-browser';
+import {AuthService} from '../../services/auth.service';
+import {DataService} from '../../services/data.service';
+import {DarkModeService} from '../../services/dark-mode.service';
+import {SearchService} from '../../services/search.service';
+import {Observable} from 'rxjs';
 
 @Component({
   // encapsulation: ViewEncapsulation.None,
@@ -11,51 +16,73 @@ import {DomSanitizer} from '@angular/platform-browser';
 export class SnippetComponent implements OnInit {
 
   @Input() snippet: Snippet;
+  @Input() index: number;
 
-  currentStyles: {};
+  $codeSnippets: Observable<Snippet[]>;
+  darkMode = true;
 
-  constructor(private sanitizer: DomSanitizer) {
+  searchString: string;
+
+  color = 'primary';
+  editMode: boolean;
+  deleteMode: boolean;
+  deletingSnippet: boolean;
+  selectedSnippet: number;
+
+  editSnippet: Snippet;
+  snippetLiked: boolean;
+
+  constructor(public authService: AuthService,
+              private dataService: DataService,
+              private darkModeService: DarkModeService,
+              private sanitizer: DomSanitizer,
+              private searchService: SearchService) {
   }
 
   ngOnInit() {
-    // console.log(this.snippet);
+    this.darkModeService.getDarkmode().subscribe(value => this.darkMode = value);
+    this.deleteMode = false;
+    this.deletingSnippet = false;
 
-    // console.log(JSON.parse(this.snippet.code.cssSource));
-    // this.currentStyles = {
-    //   color: 'red'
-    // };
-    // console.log(this.currentStyles);
-
-    // this.currentStyles = JSON.parse(this.snippet.code.cssSource);
   }
 
-  makeStyleTrusted(style) {
-    return this.sanitizer.bypassSecurityTrustStyle(style);
+  identify(index, item) {
+    return item.id;
   }
 
-  makeHtmlTrusted(html) {
-    return this.sanitizer.bypassSecurityTrustHtml(html);
+  isLoggedIn() {
+    return AuthService.isLoggedIn;
   }
 
-  getCSS(currentStyles) {
-    return this.makeHtmlTrusted(`<style type="text/css">${currentStyles}</style>`);
+  snippetEdit(snippet) {
+    this.editSnippet = snippet;
+    this.editMode = true;
+    window.scroll(0, 100);
+    // this.newSnippet.nativeElement.scrollIntoView();
   }
 
-  getCode(currentStyles, html) {
+  cancelDeleteMode() {
+    this.deleteMode = false;
+    this.selectedSnippet = undefined;
+    this.deletingSnippet = undefined;
+  }
 
-    const code = this.makeHtmlTrusted(`
-    <html lang="en">
-    <head>
-    <style type="text/css">${currentStyles}</style>
-</head>
-<body>
-<div [innerHTML]="${this.makeHtmlTrusted(html)}"></div>
-</body>
-</html>
-`);
+  snippetDelete(snippet: Snippet) {
+    this.deletingSnippet = true;
+    this.dataService.deleteSnippet(snippet)
+      .then(res => {
+        console.log(res);
+        this.cancelDeleteMode();
+      });
+  }
 
-    console.log(code);
+  confirmDelete(index) {
+    this.deleteMode = true;
+    this.selectedSnippet = index;
+  }
 
-    return code;
+  toggleSnippetLike(snippet: Snippet) {
+    snippet.liked = !snippet.liked;
+    this.dataService.saveSnippetLike(snippet);
   }
 }

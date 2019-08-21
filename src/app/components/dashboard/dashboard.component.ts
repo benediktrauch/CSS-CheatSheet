@@ -28,6 +28,7 @@ export class DashboardComponent implements OnInit {
   selectedSnippet: number;
 
   editSnippet: Snippet;
+  snippetLiked: boolean;
 
   constructor(public authService: AuthService,
               private dataService: DataService,
@@ -50,7 +51,8 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
     this.darkModeService.getDarkmode().subscribe(value => this.darkMode = value);
 
-    this.$codeSnippets = this.dataService.getSnippets();
+    this.$codeSnippets = this.dataService.getUserLikes();
+    this.$codeSnippets.subscribe(val => console.log(val));
   }
 
   toggleEditMode() {
@@ -120,5 +122,20 @@ export class DashboardComponent implements OnInit {
 
   setSearchString(searchString: string) {
     this.searchService.setSearchString(searchString);
+  }
+
+  toggleSnippetLike(snippet: Snippet) {
+    this.snippetLiked = !this.snippetLiked;
+
+    this.dataService.saveSnippetLike(snippet);
+  }
+
+  isSnippedLiked() {
+    return this.snippetLiked;
+  }
+
+  scrollToElement($element): void {
+    console.log($element);
+    $element.scrollIntoView({behavior: 'smooth', block: 'start', inline: 'nearest'});
   }
 }
