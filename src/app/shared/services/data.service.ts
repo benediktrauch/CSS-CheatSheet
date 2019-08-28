@@ -124,9 +124,7 @@ export class DataService {
 
   getUserLikes(): Observable<Snippet[]> {
     const userId = this.authService.getUserId();
-    const getOptions: GetOptions = {
-      source: 'cache'
-    };
+
     const obs1 = this.firestore.collection<Snippet>('snippet').valueChanges();
     // const obs1 = this.firestore.collection<Snippet>('snippet').get(getOptions);
 
@@ -146,7 +144,7 @@ export class DataService {
       return this.likedSnippets$.pipe(shareReplay(1));
     } else {
       this.likedSnippets$ = obs1.pipe(shareReplay(1));
+      return this.likedSnippets$;
     }
-    // return this.likedSnippets$;
   }
 }

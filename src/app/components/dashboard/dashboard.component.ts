@@ -40,7 +40,6 @@ export class DashboardComponent implements OnInit {
 
     this.searchService.getSearchString().subscribe(
       value => {
-        console.log(value);
         this.searchString = value;
       }
     );
@@ -54,7 +53,7 @@ export class DashboardComponent implements OnInit {
     this.darkModeService.getDarkmode().subscribe(value => this.darkMode = value);
 
     this.$codeSnippets = this.dataService.getUserLikes();
-    this.$codeSnippets.subscribe(val => console.log(val));
+    // this.$codeSnippets.subscribe(val => console.log(val));
     this.orderByString = '';
   }
 

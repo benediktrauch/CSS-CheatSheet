@@ -9,7 +9,7 @@ export class FilterPipe implements PipeTransform {
   transform(value: Snippet[], ...args: any[]): Snippet[] {
 
     if (value) {
-      console.log(value);
+      // console.log(value);
       const searchString = args[0].toLowerCase();
 
       const returnValue = value.filter(e => {
