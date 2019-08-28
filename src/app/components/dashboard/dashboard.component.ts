@@ -40,8 +40,8 @@ export class DashboardComponent implements OnInit {
 
     this.searchService.getSearchString().subscribe(
       value => {
+        console.log(value);
         this.searchString = value;
-        // console.log(value);
       }
     );
   }
@@ -102,6 +102,15 @@ export class DashboardComponent implements OnInit {
 
   toggleFilter() {
     this.openFilter = !this.openFilter;
+  }
+
+  snippetEdit(snippet) {
+    this.editSnippet = snippet;
+    this.editMode = true;
+    // window.scroll(0, 100);
+    this.newSnippet.nativeElement.scrollIntoView();
+    window.scroll(0, 100);
+    // this.newSnippet.nativeElement.scrollIntoView();
   }
 
   scrollToElement($element): void {

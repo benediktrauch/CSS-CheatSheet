@@ -2,17 +2,18 @@
 
   <!--<button mat-raised-button color="primary">Click me!</button>-->
 
-  <div class="actionSection">
+  <div class="actionSection" *ngIf="!editMode">
     <button [ngClass]="{'refreshButton': true}" mat-icon-button aria-label="refresh button">
       <mat-icon [ngClass]="{'refreshButtonIcon': true}"><!--autorenew--></mat-icon>
     </button>
 
-    <a mat-stroked-button color="primary"
-       (click)="toggleEditMode()"
-       href="dashboard#newSnippet"
-       *ngIf="isLoggedIn() && !editMode">
-      Add new
-    </a>
+    <div class="centre">
+      <a mat-stroked-button color="primary"
+         (click)="toggleEditMode(); scrollToElement(newSnippetID)"
+         *ngIf="isLoggedIn() && !editMode">
+        Add new
+      </a>
+    </div>
 
     <div class="right">
       <div [ngClass]="{'filterWrapper': true, ' openFilter': openFilter}">
@@ -43,7 +44,7 @@
     </div>
   </div>
 
-  <ng-container id="newSnippet" #newSnippet></ng-container>
+  <ng-container id="newSnippet" #newSnippetID></ng-container>
   <ng-container class="snippet mdc-elevation--z4" *ngIf="editMode">
     <csscs-edit-snippet (cancelEdit)="cancelEditMode()" (submitEdit)="addOrUpdateSnippet($event)"
                         [snippet]="editSnippet"></csscs-edit-snippet>
@@ -51,6 +52,8 @@
 
   <ng-container *ngIf="searchString
   && searchString.length > 1
+  && ($codeSnippets | async)
+  && (($codeSnippets | async) | csscsFilter : searchString)
   && (($codeSnippets | async) | csscsFilter : searchString).length < 1"
                 class="mdc-elevation--z4 snippet">
     <h1>No snippets found for: {{searchString}}</h1>
@@ -76,7 +79,7 @@
   <csscs-snippet
     *ngFor="let snippet of ($codeSnippets | async) | csscsFilter : searchString | orderBy: orderByString;
     index as index; trackBy: identify"
-    [snippet]="snippet"></csscs-snippet>
+    [snippet]="snippet" (snippetEditAction)="snippetEdit(snippet)"></csscs-snippet>
 
   <div class="darkmodeFab">
     <button mat-fab color="primary" (click)="toggleDarkMode()" aria-label="color toggle button">

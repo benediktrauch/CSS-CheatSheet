@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
 import {Snippet} from './snippet';
-import {combineLatest, merge, Observable} from 'rxjs';
+import {combineLatest, Observable} from 'rxjs';
 import {AngularFirestore} from '@angular/fire/firestore';
-// import {filter, map, shareReplay, switchMap, flatMap, concatMap, mergeMap, mergeAll} from 'rxjs/operators';
+import {shareReplay} from 'rxjs/operators';
 import * as firebase from 'firebase';
 import {AuthService} from './auth.service';
 import {User} from './user';
@@ -143,10 +143,10 @@ export class DataService {
         });
         return newSnippets;
       });
-      return this.likedSnippets$;
+      return this.likedSnippets$.pipe(shareReplay(1));
     } else {
-      this.likedSnippets$ = obs1;
+      this.likedSnippets$ = obs1.pipe(shareReplay(1));
     }
-    return this.likedSnippets$;
+    // return this.likedSnippets$;
   }
 }

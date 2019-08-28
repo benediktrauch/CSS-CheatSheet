@@ -1,4 +1,4 @@
-import {Component, ElementRef, HostListener, Input, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
+import {Component, ElementRef, EventEmitter, HostListener, Input, OnInit, Output, ViewChild, ViewEncapsulation} from '@angular/core';
 import {Snippet} from '../../services/snippet';
 import {DomSanitizer} from '@angular/platform-browser';
 import {AuthService} from '../../services/auth.service';
@@ -18,6 +18,8 @@ export class SnippetComponent implements OnInit {
   @Input() snippet: Snippet;
   @Input() index: number;
 
+  @Output() snippetEditAction = new EventEmitter();
+
   $codeSnippets: Observable<Snippet[]>;
   darkMode = true;
 
@@ -31,6 +33,7 @@ export class SnippetComponent implements OnInit {
 
   editSnippet: Snippet;
   snippetLiked: boolean;
+
   // el: any;
 
   constructor(public authService: AuthService,
@@ -44,7 +47,6 @@ export class SnippetComponent implements OnInit {
     this.darkModeService.getDarkmode().subscribe(value => this.darkMode = value);
     this.deleteMode = false;
     this.deletingSnippet = false;
-
   }
 
   identify(index, item) {
@@ -55,10 +57,19 @@ export class SnippetComponent implements OnInit {
     return AuthService.isLoggedIn;
   }
 
+  isMod() {
+    return this.authService.isMod();
+  }
+
+  isAdmin() {
+    return this.authService.isAdmin();
+  }
+
   snippetEdit(snippet) {
     this.editSnippet = snippet;
     this.editMode = true;
-    window.scroll(0, 100);
+    this.snippetEditAction.emit();
+    this.scrollToTop();
     // this.newSnippet.nativeElement.scrollIntoView();
   }
 
@@ -85,6 +96,16 @@ export class SnippetComponent implements OnInit {
   toggleSnippetLike(snippet: Snippet) {
     snippet.liked = !snippet.liked;
     this.dataService.saveSnippetLike(snippet);
+  }
+
+  scrollToTop() {
+    (function smoothscroll() {
+      const currentScroll = document.documentElement.scrollTop || document.body.scrollTop;
+      if (currentScroll > 0) {
+        window.requestAnimationFrame(smoothscroll);
+        window.scrollTo(0, currentScroll - (currentScroll / 8));
+      }
+    })();
   }
 
   // isElementInViewport(el) {

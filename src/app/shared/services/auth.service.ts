@@ -28,9 +28,16 @@ export class AuthService {
       if (user) {
         this.userData = user;
         // console.log(this.userData);
-        localStorage.setItem('user', JSON.stringify(this.userData));
-        JSON.parse(localStorage.getItem('user'));
-        this.updatedUser(user);
+        this.afs.collection<User>('users').doc(this.userData.uid).get()
+          .subscribe(userData => {
+            // console.log(userData.data());
+            this.userData.roles = userData.data().roles;
+            localStorage.setItem('user', JSON.stringify(this.userData));
+            JSON.parse(localStorage.getItem('user'));
+            this.updatedUser(user);
+          }
+        );
+
       } else {
         localStorage.setItem('user', null);
         JSON.parse(localStorage.getItem('user'));
@@ -54,6 +61,20 @@ export class AuthService {
     const user = JSON.parse(localStorage.getItem('user'));
     // console.log(user);
     return (user !== null && user.emailVerified !== false);
+  }
+
+
+  isAdmin(): boolean {
+    const user = JSON.parse(localStorage.getItem('user'));
+    console.log(user);
+
+    return user !== null && user.roles ? user.roles.includes('admin') : false;
+  }
+
+
+  isMod(): boolean {
+    const user = JSON.parse(localStorage.getItem('user'));
+    return user !== null && user.roles ? user.roles.includes('moderator') : false;
   }
 
   getUserId(): string {

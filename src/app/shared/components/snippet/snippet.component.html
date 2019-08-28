@@ -46,7 +46,8 @@
             <mat-icon [ngClass]="{'liked': snippet.liked}">{{ snippet.liked ? 'star' : 'star_border'}}</mat-icon>
           </button>
         </div>
-        <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+        <button mat-icon-button [matMenuTriggerFor]="menu"
+                aria-label="Example icon-button with a menu" *ngIf="isMod()">
           <mat-icon>more_vert</mat-icon>
         </button>
         <mat-menu #menu="matMenu">
@@ -54,7 +55,7 @@
             <mat-icon>edit</mat-icon>
             <span>Edit</span>
           </button>
-          <button mat-menu-item (click)="confirmDelete(index)">
+          <button mat-menu-item (click)="confirmDelete(index)" *ngIf="isAdmin()">
             <mat-icon>delete</mat-icon>
             <span>Delete</span>
           </button>
