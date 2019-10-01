@@ -15,7 +15,7 @@ export class SearchService {
     this.route.queryParams
       .pipe(filter(e => e.search ))
       .subscribe(params => {
-        console.log(params);
+        // console.log(params);
         this.setSearchString(params.search);
       });
 

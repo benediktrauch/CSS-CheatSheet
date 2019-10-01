@@ -44,7 +44,7 @@ export class EditSnippetComponent implements OnInit {
 
   ngOnInit() {
     this.darkModeService.getDarkmode().subscribe(value => this.darkMode = value);
-    console.log(this.snippet);
+    // console.log(this.snippet);
     if (this.snippet) {
       this.buttonText = 'Update Snippet';
       this.tags = this.snippet.tags;
@@ -107,8 +107,8 @@ export class EditSnippetComponent implements OnInit {
     this.uploading = true;
 
     const s = this.snippetForm.value;
-    console.log(s);
-    console.log(this.tags);
+    // console.log(s);
+    // console.log(this.tags);
 
     const newSnippet: Snippet = {
       title: s.title,
@@ -124,14 +124,14 @@ export class EditSnippetComponent implements OnInit {
     if (this.snippet && this.snippet.id) {
       newSnippet.id = this.snippet.id;
     }
-    console.log(newSnippet);
+    // console.log(newSnippet);
 
     this.submitEdit.emit(newSnippet);
   }
 
   checkForm() {
     this.snippetForm.markAllAsTouched();
-    console.log(this.snippetForm.value);
+    // console.log(this.snippetForm.value);
   }
 
   closeEdit() {

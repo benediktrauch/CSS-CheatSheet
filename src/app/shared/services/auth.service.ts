@@ -30,10 +30,14 @@ export class AuthService {
         // console.log(this.userData);
         this.afs.collection<User>('users').doc(this.userData.uid).get()
           .subscribe(userData => {
-            // console.log(userData.data());
+            console.log(userData.data());
             this.userData.roles = userData.data().roles;
+            console.log(this.userData);
             localStorage.setItem('user', JSON.stringify(this.userData));
-            JSON.parse(localStorage.getItem('user'));
+            localStorage.setItem('roles', JSON.stringify({roles: userData.data().roles}));
+            console.log(JSON.parse(localStorage.getItem('user')));
+            console.log(JSON.parse(localStorage.getItem('roles')));
+
             this.updatedUser(user);
           }
         );
@@ -66,15 +70,20 @@ export class AuthService {
 
   isAdmin(): boolean {
     const user = JSON.parse(localStorage.getItem('user'));
-    console.log(user);
+    const roles = JSON.parse(localStorage.getItem('roles'));
+    // console.log(roles);
+    return user !== null && roles.roles ? roles.roles.includes('admin') : false;
 
-    return user !== null && user.roles ? user.roles.includes('admin') : false;
+    // return user !== null && user.roles ? user.roles.includes('admin') : false;
   }
 
 
   isMod(): boolean {
     const user = JSON.parse(localStorage.getItem('user'));
-    return user !== null && user.roles ? user.roles.includes('moderator') : false;
+    const roles = JSON.parse(localStorage.getItem('roles'));
+    // console.log(roles);
+    return user !== null && roles.roles ? (roles.roles.includes('moderator') || roles.roles.includes('admin') ) : false;
+    // return user !== null && user.roles ? user.roles.includes('moderator') : false;
   }
 
   getUserId(): string {

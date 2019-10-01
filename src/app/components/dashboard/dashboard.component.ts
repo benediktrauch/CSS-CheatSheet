@@ -113,7 +113,7 @@ export class DashboardComponent implements OnInit {
   }
 
   scrollToElement($element): void {
-    console.log($element);
+    // console.log($element);
     $element.scrollIntoView({behavior: 'smooth', block: 'start', inline: 'nearest'});
   }
 }

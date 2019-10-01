@@ -83,7 +83,7 @@ export class SnippetComponent implements OnInit {
     this.deletingSnippet = true;
     this.dataService.deleteSnippet(snippet)
       .then(res => {
-        console.log(res);
+        // console.log(res);
         this.cancelDeleteMode();
       });
   }
